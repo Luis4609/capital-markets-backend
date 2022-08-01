@@ -1,46 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< Updated upstream
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.optimissa.archetype</groupId>
-    <artifactId>elemental-archetype</artifactId>
-    <packaging>pom</packaging>
-    <version>1.1.0-SNAPSHOT</version>
-
-    <!-- Child modules -->
-    <modules>
-        <module>elemental-archetype-core</module>
-        <module>elemental-archetype-context</module>
-        <module>elemental-archetype-messaging</module>
-        <module>elemental-archetype-data</module>
-        <module>elemental-archetype-webapp</module>
-        <module>elemental-archetype-reporting</module>
-        <module>elemental-archetype-application</module>
-    </modules>
-
-    <!-- Name of the project and versions used whithin the whole project -->
-    <properties>
-        <project.name>elemental-archetype</project.name>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.maven.plugin.version>1.5.4.RELEASE</spring.boot.maven.plugin.version>
-        <version.jboss.bom.eap>6.4.14.GA</version.jboss.bom.eap>
-        <spring.platform.bom>Athens-SR5</spring.platform.bom>
-        <javax.ws.rs>2.0.1</javax.ws.rs>
-        <redis.client.version>2.6.2</redis.client.version>
-        <optimissa-platform.version>1.5.0</optimissa-platform.version>
-        <jasperreports.version>6.1.0</jasperreports.version>
-        <commons-beanutils.version>1.9.0</commons-beanutils.version>
-        <commons-collections.version>3.2.1</commons-collections.version>
-        <commons-digester.version>2.1</commons-digester.version>
-        <commons-logging.version>1.1.1</commons-logging.version>
-        <itext.version>2.1.7</itext.version>
-        <apache.poi.version>3.14</apache.poi.version>
-        <oracle.version>11.2.0.2.0</oracle.version>
-    </properties>
-=======
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -54,7 +12,7 @@
     <artifactId>app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>app</name>
-    <description>Backend for Capital Markets APP</description>
+    <description>Backend for Capital Markets</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -62,6 +20,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -73,11 +35,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--  H2 Database dependency-->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -89,115 +50,5 @@
             </plugin>
         </plugins>
     </build>
->>>>>>> Stashed changes
-
-    <!--Manage the versions of the dependencies for this module and all its children modules -->
-    <dependencyManagement>
-        <dependencies>
-            <!-- Dependencies of jboss. If you have to use tomcat or don't want the dependencies to depend on of the jboss version, remove this dependency. -->
-            <dependency>
-                <groupId>org.jboss.bom.eap</groupId>
-                <artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
-                <version>${version.jboss.bom.eap}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- Spring dependencies. -->
-            <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>${spring.platform.bom}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <!-- Common dependencies for the whole project. -->
-    <dependencies>
-        <!-- Spring starter web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- Spring starter logging-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-    </dependencies>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.6.1</version>
-                    <configuration>
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.source}</target>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
-                    <configuration>
-                        <updateReleaseInfo>true</updateReleaseInfo>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
-                    <configuration>
-                        <preparationGoals>clean deploy</preparationGoals>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-
-    <organization>
-        <name>Optimissa</name>
-        <url>http://www.optimissa.com</url>
-    </organization>
-
-    <!-- Source repository system -->
-    <scm>
-        <connection>scm:git:http://srvoptigit.optimissa.into/optimissa/elemental-archetype.git</connection>
-        <developerConnection>scm:git:git@srvoptigit.optimissa.into:optimissa/elemental-archetype.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
-
-    <distributionManagement>
-        <repository>
-            <id>proteox</id>
-            <url>http://srvoptinexus.optimissa.into/content/repositories/optimissa</url>
-        </repository>
-        <snapshotRepository>
-            <id>proteox-snapshot</id>
-            <url>http://srvoptinexus.optimissa.into/content/repositories/optimissa-snapshot</url>
-        </snapshotRepository>
-    </distributionManagement>
 
 </project>
