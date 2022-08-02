@@ -8,6 +8,9 @@ import com.capitalmarkets.app.dto.CurrencyDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class CurrencyProviderImpl implements ICurrencyProvider {
@@ -17,7 +20,7 @@ public class CurrencyProviderImpl implements ICurrencyProvider {
 
     @Override
     public CurrencyDTO getCurrencyByName(String name) {
-        return currencyDao.findByName(name)
+        return currencyDao.getByCurrencyName(name)
                 .map(mapper::mapToDto)
                 .orElse(null);
     }
@@ -30,5 +33,11 @@ public class CurrencyProviderImpl implements ICurrencyProvider {
     }
 
 
+    public Collection<CurrencyDTO> getAll() {
+
+        return currencyDao.findAll().stream()
+                .map(mapper::mapToDto)
+                .collect(Collectors.toList());
+    }
 
 }

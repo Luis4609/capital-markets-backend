@@ -18,6 +18,7 @@ public class AppApplication {
 		return args -> {
 
 			cuprovide.getCurrencyByCode("???");
+			cuprovide.getCurrencyByName("?????");
 		};
 	}
 }
