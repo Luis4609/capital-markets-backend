@@ -5,11 +5,11 @@ import com.capitalmarkets.app.dto.CurrencyDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CurrencyMapper implements Imapper<CurrencyModel, CurrencyDTO>{
+public class CurrencyMapper implements Imapper<CurrencyModel, CurrencyDTO> {
 
 
-        @Override
-        public CurrencyDTO mapToDto(CurrencyModel currencyModel) {
+    @Override
+    public CurrencyDTO mapToDto(CurrencyModel currencyModel) {
 
         CurrencyDTO dto = new CurrencyDTO(currencyModel.getCode(), currencyModel.getName());
 
@@ -19,7 +19,7 @@ public class CurrencyMapper implements Imapper<CurrencyModel, CurrencyDTO>{
     @Override
     public CurrencyModel mapToEntity(CurrencyDTO currencyDTO) {
 
-        CurrencyModel cm = new CurrencyModel(0,currencyDTO.code, currencyDTO.name);
+        CurrencyModel cm = new CurrencyModel(0, currencyDTO.code, currencyDTO.name);
 
         return cm;
     }
