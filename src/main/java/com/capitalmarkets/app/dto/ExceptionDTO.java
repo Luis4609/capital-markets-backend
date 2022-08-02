@@ -1,5 +1,7 @@
 package com.capitalmarkets.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public abstract class ExceptionDTO {
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String exception;
 
 }

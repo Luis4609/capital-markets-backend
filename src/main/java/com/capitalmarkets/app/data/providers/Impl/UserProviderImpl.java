@@ -19,13 +19,13 @@ public class UserProviderImpl implements IUserProvider {
     public UserDTO getUserByDni(String dni) {
         return userDao.getByDni(dni)
                 .map(mapper::mapToDto)
-                .orElse(null);
+                .orElse(new UserDTO("No existe un usuario con ese dni"));
     }
 
     @Override
     public UserDTO getUserByMail(String mail) {
         return userDao.getByMail(mail)
                 .map(mapper::mapToDto)
-                .orElse(null);
+                .orElse(new UserDTO("No existe un usuario con ese mail"));
     }
 }
