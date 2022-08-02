@@ -7,3 +7,7 @@ INSERT INTO USERS (Nombre, Apellido, Dni, mail, contraseña) VALUES('Luis', 'Mon
 
 
 INSERT INTO CURRENCIES (Codigo, Nombre) VALUES('ASC', 'Andres Coin');
+
+INSERT INTO CURRENCIES (Codigo, Nombre) VALUES('ppp', 'Horchata');
+INSERT INTO CURRENCIES (Codigo, Nombre) VALUES('Ass', 'Coin');
+
