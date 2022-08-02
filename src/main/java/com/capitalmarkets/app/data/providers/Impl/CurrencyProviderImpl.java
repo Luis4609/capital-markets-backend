@@ -22,14 +22,14 @@ public class CurrencyProviderImpl implements ICurrencyProvider {
     public CurrencyDTO getCurrencyByName(String name) {
         return currencyDao.getByName(name)
                 .map(mapper::mapToDto)
-                .orElse(null);
+                .orElse(new CurrencyDTO("No se ha encontrado ese nombre"));
     }
 
     @Override
     public CurrencyDTO getCurrencyByCode(String code) {
         return currencyDao.getByCode(code)
                 .map(mapper::mapToDto)
-                .orElse(null);
+                .orElse(new CurrencyDTO("No se ha encontrado ese codigo"));
     }
 
 
