@@ -39,5 +39,4 @@ public class CurrencyProviderImpl implements ICurrencyProvider {
                 .map(mapper::mapToDto)
                 .collect(Collectors.toList());
     }
-
 }
