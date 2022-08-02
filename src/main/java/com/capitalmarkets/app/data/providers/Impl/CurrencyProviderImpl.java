@@ -20,14 +20,14 @@ public class CurrencyProviderImpl implements ICurrencyProvider {
 
     @Override
     public CurrencyDTO getCurrencyByName(String name) {
-        return currencyDao.getByCurrencyName(name)
+        return currencyDao.getByName(name)
                 .map(mapper::mapToDto)
                 .orElse(null);
     }
 
     @Override
     public CurrencyDTO getCurrencyByCode(String code) {
-        return currencyDao.getByCurrencyCode(code)
+        return currencyDao.getByCode(code)
                 .map(mapper::mapToDto)
                 .orElse(null);
     }

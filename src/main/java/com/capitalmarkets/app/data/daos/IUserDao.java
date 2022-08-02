@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface IUserDao extends JpaRepository<UserModel,String> {
 
-    Optional<UserModel> getByUsername(String username);
+    Optional<UserModel> getByName(String name);
 
     Optional<UserModel> getByMail(String mail);
 

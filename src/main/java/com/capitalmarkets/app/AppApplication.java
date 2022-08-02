@@ -17,8 +17,7 @@ public class AppApplication {
 	public CommandLineRunner runner(ICurrencyProvider cuprovide){
 		return args -> {
 
-			cuprovide.getCurrencyByCode("???");
-			cuprovide.getCurrencyByName("?????");
+			System.out.println(cuprovide.getCurrencyByName("Andres Coin").toString());
 		};
 	}
 }

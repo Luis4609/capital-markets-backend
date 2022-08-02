@@ -1,6 +1,8 @@
 package com.capitalmarkets.app.data.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -15,10 +17,10 @@ public class CurrencyModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "Codigo",nullable=false,unique = true)
+    @Column(name = "Codigo", nullable = false, unique = true)
     private String code;
 
-    @Column(name = "Nombre",nullable=false)
+    @Column(name = "Nombre", nullable = false)
     private String name;
 
 

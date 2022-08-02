@@ -10,4 +10,11 @@ public class CurrencyDTO {
     public String code;
     public String name;
 
+    @Override
+    public String toString() {
+        return "CurrencyDTO{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
