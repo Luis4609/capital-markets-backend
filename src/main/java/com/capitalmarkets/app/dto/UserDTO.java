@@ -9,6 +9,7 @@ public class UserDTO {
 
     public String mail;
     public String name;
+    public String dni;
     public String password;
 
 }
