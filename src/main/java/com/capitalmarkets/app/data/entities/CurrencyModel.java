@@ -23,5 +23,8 @@ public class CurrencyModel {
     @Column(name = "Nombre", nullable = false)
     private String name;
 
-
+    public CurrencyModel(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
 }

@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public interface ICurrencyDao extends JpaRepository<CurrencyModel,String> {
 
-
     Optional<CurrencyModel> getByName(String name);
 
     Optional<CurrencyModel> getByCode(String code);
