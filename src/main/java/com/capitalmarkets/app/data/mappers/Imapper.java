@@ -10,15 +10,5 @@ public interface Imapper <T,R>{
 
     T mapToEntity(R r);
 
-    default List<R> mapListToDtoList(Collection<T> list) {
-        return list.stream()
-                .map(this::mapToDto)
-                .collect(Collectors.toList());
-    }
 
-    default List<T> mapListToEntityList(Collection<R> list) {
-        return list.stream()
-                .map(this::mapToEntity)
-                .collect(Collectors.toList());
-    }
 }

@@ -1,11 +1,12 @@
-package com.capitalmarkets.app.dto;
+package com.capitalmarkets.app.dto.data;
 
+import com.capitalmarkets.app.dto.data.ExceptionDTO;
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDTO extends ExceptionDTO{
+public class UserDTO extends ExceptionDTO {
 
     public String mail;
     public String name;

@@ -1,7 +1,7 @@
 package com.capitalmarkets.app.data.mappers;
 
 import com.capitalmarkets.app.data.entities.CurrencyModel;
-import com.capitalmarkets.app.dto.CurrencyDTO;
+import com.capitalmarkets.app.dto.data.CurrencyDTO;
 import org.springframework.stereotype.Component;
 
 @Component
