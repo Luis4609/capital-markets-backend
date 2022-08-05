@@ -12,4 +12,6 @@ public interface ICurrencyDao extends JpaRepository<CurrencyModel,String> {
 
     Optional<CurrencyModel> getByCode(String code);
 
+
+
 }

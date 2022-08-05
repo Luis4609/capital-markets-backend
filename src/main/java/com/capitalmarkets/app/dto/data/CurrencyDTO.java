@@ -1,11 +1,11 @@
-package com.capitalmarkets.app.dto;
+package com.capitalmarkets.app.dto.data;
 
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CurrencyDTO extends ExceptionDTO{
+public class CurrencyDTO extends ExceptionDTO {
 
     public String code;
     public String name;

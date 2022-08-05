@@ -4,7 +4,8 @@ import com.capitalmarkets.app.data.daos.ICurrencyDao;
 import com.capitalmarkets.app.data.entities.CurrencyModel;
 import com.capitalmarkets.app.data.mappers.Imapper;
 import com.capitalmarkets.app.data.providers.ICurrencyProvider;
-import com.capitalmarkets.app.dto.CurrencyDTO;
+import com.capitalmarkets.app.dto.data.CurrencyDTO;
+import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,4 +40,16 @@ public class CurrencyProviderImpl implements ICurrencyProvider {
                 .map(mapper::mapToDto)
                 .collect(Collectors.toList());
     }
+
+
+    public CurrencyModel create(CurrencyApiDTO dto){
+
+        CurrencyModel dto1=CurrencyModel.builder()
+                .code(dto.code)
+                .name(dto.name)
+                .build();
+
+        return currencyDao.save(dto1);
+    }
+
 }

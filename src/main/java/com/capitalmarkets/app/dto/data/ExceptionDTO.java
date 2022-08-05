@@ -1,4 +1,4 @@
-package com.capitalmarkets.app.dto;
+package com.capitalmarkets.app.dto.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

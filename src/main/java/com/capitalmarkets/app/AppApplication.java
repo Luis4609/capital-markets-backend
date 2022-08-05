@@ -1,36 +1,43 @@
 package com.capitalmarkets.app;
 
-import com.capitalmarkets.app.data.daos.ICurrencyDao;
-import com.capitalmarkets.app.data.entities.CurrencyModel;
 import com.capitalmarkets.app.data.providers.ICurrencyProvider;
-import com.capitalmarkets.app.implementation.service.IApiService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
+import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
+import com.capitalmarkets.app.implementation.adapters.ICurrencyAdapter;
+import com.capitalmarkets.app.implementation.services.IcurrencyService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.HashMap;
-import java.util.Map;
-
+@Slf4j
 @SpringBootApplication
 public class AppApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(AppApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(AppApplication.class, args);
+	}
 
-    @Bean
-    public CommandLineRunner runner(ICurrencyDao currencyDao, IApiService iApiService) {
-        return args -> {
+	@Bean
+	public CommandLineRunner runner(ICurrencyAdapter adapter, IcurrencyService service,ICurrencyProvider prov){
+		return args -> {
 
-            //Insert initial Currencies from external API
-            for (Map.Entry<String, String> entry : iApiService.getCurrenciesJson().entrySet()) {
 
-                CurrencyModel currencyModel = new CurrencyModel(entry.getKey(), entry.getValue());
-                currencyDao.save(currencyModel);
+			adapter.getAll();
+			adapter.getConversion(10,"GBP","USD");
 
-            }
-        };
-    }
+			for (CurrencyApiDTO currencyApiDTO : service.getAll()) {
+
+				prov.create(currencyApiDTO);
+				log.info(currencyApiDTO.toString());
+			}
+
+			CurrencyConverterDTO prueba = adapter.getConversion(10,"GBP","USD");
+				log.info(prueba.toString());
+
+				CurrencyConverterDTO prueba2=service.getConversion(10,"GBP","USD");
+				log.info(prueba2.toString());
+		};
+	}
 }

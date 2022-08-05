@@ -4,7 +4,7 @@ import com.capitalmarkets.app.data.daos.IUserDao;
 import com.capitalmarkets.app.data.entities.UserModel;
 import com.capitalmarkets.app.data.mappers.Imapper;
 import com.capitalmarkets.app.data.providers.IUserProvider;
-import com.capitalmarkets.app.dto.UserDTO;
+import com.capitalmarkets.app.dto.data.UserDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

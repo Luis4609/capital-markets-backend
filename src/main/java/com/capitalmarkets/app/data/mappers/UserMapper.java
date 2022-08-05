@@ -1,7 +1,7 @@
 package com.capitalmarkets.app.data.mappers;
 
 import com.capitalmarkets.app.data.entities.UserModel;
-import com.capitalmarkets.app.dto.UserDTO;
+import com.capitalmarkets.app.dto.data.UserDTO;
 import org.springframework.stereotype.Component;
 
 @Component
