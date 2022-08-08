@@ -16,6 +16,7 @@ public class CurrencyModelTest {
 
         assertThat(currencyModel1.getId()).isEqualTo(1);
         assertThat(currencyModel1.getId()).isNotZero();
+        assertThat(currencyModel1.getId()).isNotNull();
 
     }
     @Test
@@ -24,6 +25,8 @@ public class CurrencyModelTest {
 
         assertThat(currencyModel.getName()).isEqualTo("euro");
         //assertThat(currencyModel.setName("pepe")).isEqualTo("euro");
+        assertThat(currencyModel.getName()).isNotEmpty();
+        assertThat(currencyModel.getName()).isNotNull();
     }
 
 }
