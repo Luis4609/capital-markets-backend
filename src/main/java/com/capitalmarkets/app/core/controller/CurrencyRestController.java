@@ -3,6 +3,7 @@ package com.capitalmarkets.app.core.controller;
 import com.capitalmarkets.app.core.services.IcurrencyControllerService;
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
+import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,5 +33,10 @@ public class CurrencyRestController {
         return controllerService.getConversion(value,base,conversion);
     }
 
+    @GetMapping("/historical")
+    public CurrencyHistoricalDTO getHistorical(String date, int value, String base, String conversion){
+
+        return controllerService.getHistorical(date, value, base, conversion);
+    }
 
 }

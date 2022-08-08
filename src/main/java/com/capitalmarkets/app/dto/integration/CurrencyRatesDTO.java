@@ -5,16 +5,11 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.time.LocalDate;
-
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ToString
-public class CurrencyConverterDTO {
+public class CurrencyRatesDTO {
 
-    public double amount;
-    public String from;
-    public String to;
-    public double value;
+    public double result;
 }

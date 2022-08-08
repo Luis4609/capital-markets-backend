@@ -28,7 +28,6 @@ public class CurrencyConverterMapper implements Imapper<CurrencyConverterDTO> {
                 .amount(json.get("amount").asDouble())
                 .from(json.get("base").asText())
                 .to(rates.fields().next().getKey())
-                .date(json.get("date").asText())
                 .value(rates.fields().next().getValue().asDouble())
                 .build();
 
