@@ -1,22 +1,35 @@
 package com.capitalmarkets.app.core.controller;
 
-import org.springframework.http.ResponseEntity;
+import com.capitalmarkets.app.core.services.IcurrencyControllerService;
+import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
+import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+//@AllArgsConstructor
 @RestController
 @RequestMapping("/currencies")
 public class CurrencyRestController {
 
-    @GetMapping("/list-string")
-    public String getCurrenciesList() {
+    @Autowired
+    private  IcurrencyControllerService controllerService;
 
-        RestTemplate restTemplate = new RestTemplate();
+    @GetMapping("/list-currencies")
+    public List<CurrencyApiDTO> getCurrenciesList() {
 
-        ResponseEntity<String> response = restTemplate.getForEntity("https://api.frankfurter.app/currencies", String.class);
-        return response.getBody();
+        return controllerService.getAll();
     }
+
+    @GetMapping("/converter")
+    public CurrencyConverterDTO getConversion( int value,String base, String conversion){
+
+        return controllerService.getConversion(value,base,conversion);
+    }
+
 
 }
