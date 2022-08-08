@@ -33,7 +33,6 @@ public class CurrencyProviderImpl implements ICurrencyProvider {
                 .orElse(new CurrencyDTO("No se ha encontrado ese codigo"));
     }
 
-
     public Collection<CurrencyDTO> getAll() {
 
         return currencyDao.findAll().stream()
