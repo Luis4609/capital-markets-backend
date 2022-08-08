@@ -1,2 +1,6 @@
-package com.capitalmarkets.app.data.daos;public class IUserDaoTest {
+package com.capitalmarkets.app.data.daos;
+
+public class IUserDaoTest {
+
+    //ToDo
 }

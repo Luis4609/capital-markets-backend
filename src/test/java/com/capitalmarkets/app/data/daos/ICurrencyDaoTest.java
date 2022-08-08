@@ -1,12 +1,12 @@
-package com.capitalmarkets.app;
+package com.capitalmarkets.app.data.daos;
 
-import com.capitalmarkets.app.data.daos.ICurrencyDao;
+
 import com.capitalmarkets.app.data.entities.CurrencyModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.*;
-import java.util.Optional;
+
 
 @SpringBootTest()
 public class ICurrencyDaoTest {
@@ -43,7 +43,9 @@ public class ICurrencyDaoTest {
 
     }
 
-    
+
+
+
 
 
 
