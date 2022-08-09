@@ -24,9 +24,14 @@ public class ICurrencyDaoTest {
         assertThat(currencyModel).isNotNull();
         assertThat(currencyModel.getCode()).isNotNull();
         assertThat(currencyModel.getName()).isEqualToIgnoringCase("EURO");
+        assertThat(currencyModel.getName()).asString();
         assertThat(currencyModel.getCode()).isNotEmpty();
+        assertThat(currencyModel.getCode()).hasSize(3);
         assertThat(currencyModel.getName()).isEqualTo("euro");
         assertThat(currencyModel.getCode()).isEqualTo("EUR");
+        assertThat(currencyModel.getCode()).toString();
+        assertThat(currencyModel.getCode()).asString();
+
 
         //org.junit.jupiter.api.Assertions.assertEquals(Optional.of(currencyModel), iCurrencyDao.getByName("euro"));
     }
@@ -36,8 +41,12 @@ public class ICurrencyDaoTest {
         CurrencyModel currencyModel = new CurrencyModel( 1, "EUR", "euro");
         assertThat(currencyModel).isNotNull();
         assertThat(currencyModel.getName()).isNotNull();
-        assertThat(currencyModel.getCode()).isEqualTo("euro");
+        assertThat(currencyModel.getName()).isEqualTo("euro");
+        assertThat(currencyModel.getCode()).isNotEmpty();
+        assertThat(currencyModel.getCode()).asString();
+        assertThat(currencyModel.getName()).asString();
         assertThat(currencyModel.getCode()).isEqualTo("EUR");
+        assertThat(currencyModel.getCode()).hasSize(3);
         assertThat(currencyModel.getName()).isNotEmpty();
         assertThat(currencyModel.getCode()).isEqualToIgnoringCase("eur");
 

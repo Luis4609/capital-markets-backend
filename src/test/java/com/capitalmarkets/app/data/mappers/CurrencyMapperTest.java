@@ -21,7 +21,6 @@ public class CurrencyMapperTest {
     @Autowired
     private CurrencyMapper currencyMapper;
 
-
     @Test
     @DisplayName(value = "Test2 -> Test para comprobar el mappeo a DTO de las CurrencyModel")
     public void MapperCurrencyToDTOTest(){
