@@ -5,10 +5,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Data
 public class CurrencyDTO extends ExceptionDTO {
 
-    public String code;
-    public String name;
+    private String code;
+    private String name;
 
     public CurrencyDTO(String exception){
         super(exception);

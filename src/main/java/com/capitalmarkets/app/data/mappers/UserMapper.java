@@ -16,7 +16,7 @@ public class UserMapper implements Imapper<UserModel, UserDTO> {
 
     @Override
     public UserModel mapToEntity(UserDTO userDTO) {
-        UserModel um = new UserModel(0, userDTO.name, userDTO.mail, userDTO.password, userDTO.dni);
-        return null;
+        UserModel um = new UserModel(0, userDTO.getName(), userDTO.getMail(), userDTO.getPassword(), userDTO.getDni());
+        return um;
     }
 }

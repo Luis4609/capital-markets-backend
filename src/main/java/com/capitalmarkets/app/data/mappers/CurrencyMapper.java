@@ -19,7 +19,7 @@ public class CurrencyMapper implements Imapper<CurrencyModel, CurrencyDTO> {
     @Override
     public CurrencyModel mapToEntity(CurrencyDTO currencyDTO) {
 
-        CurrencyModel cm = new CurrencyModel(0, currencyDTO.code, currencyDTO.name);
+        CurrencyModel cm = new CurrencyModel(0, currencyDTO.getCode(), currencyDTO.getName());
 
         return cm;
     }
