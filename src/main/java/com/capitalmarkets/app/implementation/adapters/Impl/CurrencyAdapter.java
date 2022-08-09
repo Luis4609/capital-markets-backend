@@ -55,5 +55,4 @@ public class CurrencyAdapter implements ICurrencyAdapter {
         return mapHist.mapToDto(restTemplate.getForObject(url+date+"..?amount="+value+"&from="+base+"&to="+conversion,String.class));
     }
 
-
 }
