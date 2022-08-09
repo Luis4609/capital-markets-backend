@@ -42,8 +42,8 @@ public class CurrencyProviderImpl implements ICurrencyProvider {
     public CurrencyModel create(CurrencyApiDTO dto){
 
         CurrencyModel dto1=CurrencyModel.builder()
-                .code(dto.code)
-                .name(dto.name)
+                .code(dto.getCode())
+                .name(dto.getName())
                 .build();
 
         return currencyDao.save(dto1);

@@ -3,7 +3,7 @@ package com.capitalmarkets.app.core.services;
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
-import com.capitalmarkets.app.implementation.services.IcurrencyService;
+import com.capitalmarkets.app.implementation.adapters.services.IcurrencyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

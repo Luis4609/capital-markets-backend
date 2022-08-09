@@ -2,10 +2,9 @@ package com.capitalmarkets.app;
 
 import com.capitalmarkets.app.data.providers.ICurrencyProvider;
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
-import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
 import com.capitalmarkets.app.implementation.adapters.ICurrencyAdapter;
-import com.capitalmarkets.app.implementation.services.IcurrencyService;
+import com.capitalmarkets.app.implementation.adapters.services.IcurrencyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

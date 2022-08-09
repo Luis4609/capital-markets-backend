@@ -2,15 +2,11 @@ package com.capitalmarkets.app.data.providers;
 
 
 import com.capitalmarkets.app.data.daos.ICurrencyDao;
-import com.capitalmarkets.app.data.entities.CurrencyModel;
 import com.capitalmarkets.app.dto.data.CurrencyDTO;
-import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,8 +18,7 @@ public class ICurrencyProviderTest {
 
     @Autowired
     private ICurrencyProvider iCurrencyProvider;
-//    @Autowired
-//    private CurrencyDTO currencyDTO;
+
 
 
     @Test
@@ -35,14 +30,11 @@ public class ICurrencyProviderTest {
 
 
       assertThat(dto).isNotNull();
-        //assertThat(dto.getCode()).isNotEmpty();
-      assertThat(dto.code).isNotNull();
-       //assertThat(dto.code).isNotEmpty();
-        assertThat(dto.name).isEqualTo("Euro");
-        //assertThat(dto.getName()).isEqualTo("euro");
-        assertThat(dto.name).isNotNull();
-        assertThat(dto.name).isEqualToIgnoringCase("euro");
-        //assertThat(dto.getName()).isEqualToIgnoringCase("euro");
+        assertThat(dto.getCode()).isNotEmpty();
+
+        assertThat(dto.getName()).isEqualTo("euro");
+
+        assertThat(dto.getName()).isEqualToIgnoringCase("euro");
 
         //TODO
 
@@ -54,34 +46,30 @@ public class ICurrencyProviderTest {
     public void getCurrencyByCodeTest() {
 
         CurrencyDTO dto = iCurrencyProvider.getCurrencyByCode("EUR");
-        //CurrencyDTO dto=new CurrencyDTO("eur","euro");
+
 
 
         assertThat(dto).isNotNull();
-        //assertThat(dto.getCode()).isNotEmpty();
-        assertThat(dto.code).isNotEmpty();
-        assertThat(dto.code).isEqualTo("EUR");
-        //assertThat(dto.getCode()).isEqualTo("EUR");
-        assertThat(dto.code).hasSize(3);
-        assertThat(dto.code).isEqualToIgnoringCase("eur");
-        //assertThat(dto.getCode()).isEqualToIgnoringCase("EUR");
-        assertThat(dto.code).asString();
-        //assertThat(dto.getCode()).asString();
+        assertThat(dto.getCode()).isNotEmpty();
+        assertThat(dto.getCode()).isEqualTo("EUR");
+        assertThat(dto.getCode()).hasSize(3);
+        assertThat(dto.getCode()).isEqualToIgnoringCase("EUR");
+        assertThat(dto.getCode()).asString();
 
 
     }
 
-    @Test
-    @DisplayName(value = "Test3 -> Para que devuelva todas las divisas de la bd.")
-    public void getAllTest() {
-        Collection<CurrencyDTO> currencies = iCurrencyProvider.getAll();
-        assertThat(currencies).isNotEmpty();
-        assertThat(currencies).isNotNull();
+//    @Test
+//    @DisplayName(value = "Test3 -> Para que devuelva todas las divisas de la bd.")
+//    public void getAllTest() {
+//        Collection<CurrencyDTO> currencies = iCurrencyProvider.getAll();
+//        assertThat(currencies).isNotEmpty();
+//        assertThat(currencies).isNotNull();
 
 
 //
 
-    }
+ //   }
 
     @Test
     @DisplayName(value = "Test4 -> Comprobar la construcción del currencyModel a partir del dto de la api y guarda la divisa en la BD.")

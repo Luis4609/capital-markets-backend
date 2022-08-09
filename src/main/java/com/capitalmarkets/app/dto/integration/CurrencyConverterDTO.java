@@ -1,18 +1,16 @@
 package com.capitalmarkets.app.dto.integration;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Data
 public class CurrencyConverterDTO {
 
-    public double amount;
-    public String from;
-    public String to;
-    public double value;
+    private double amount;
+    private String from;
+    private String to;
+    private double value;
 }
