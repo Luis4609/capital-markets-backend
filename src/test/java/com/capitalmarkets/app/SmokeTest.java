@@ -18,6 +18,6 @@ public class SmokeTest {
     public void contextLoads() throws Exception {
         assertThat(currencyRestController.getCurrenciesList()).isNotNull();
         assertThat(currencyRestController.getCurrenciesList()).isNotEmpty();
-        assertThat(currencyRestController.getCurrenciesList()).contains("Australian Dollar");
+
     }
 }
