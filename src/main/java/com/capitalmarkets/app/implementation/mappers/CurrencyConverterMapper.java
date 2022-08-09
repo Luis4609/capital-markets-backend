@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,8 @@ public class CurrencyConverterMapper implements Imapper<CurrencyConverterDTO> {
 
         return dto;
     }
+
+
 
     @Override
     public List<CurrencyConverterDTO> mapListToDtoList(String s) {throw new UnsupportedOperationException();}

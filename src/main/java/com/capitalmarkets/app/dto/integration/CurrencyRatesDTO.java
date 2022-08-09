@@ -11,5 +11,8 @@ import lombok.ToString;
 @ToString
 public class CurrencyRatesDTO {
 
+    public String date;
     public double result;
+
+
 }

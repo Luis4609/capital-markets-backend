@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,7 +17,9 @@ public class CurrencyHistoricalDTO {
 
     public double amount;
     public String base;
+    public String conversion;
     public String startDate;
     public String endDate;
-    public CurrencyRatesDTO rates;
+    public List<CurrencyRatesDTO> rates;
+
 }
