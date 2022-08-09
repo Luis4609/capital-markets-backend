@@ -1,9 +1,9 @@
-package com.capitalmarkets.app.implementation.adapters.services;
+package com.capitalmarkets.app.integration.adapters.services;
 
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
-import com.capitalmarkets.app.implementation.adapters.ICurrencyAdapter;
+import com.capitalmarkets.app.integration.adapters.ICurrencyAdapter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
