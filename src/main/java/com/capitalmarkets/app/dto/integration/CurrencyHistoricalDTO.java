@@ -15,11 +15,11 @@ import java.util.List;
 @ToString
 public class CurrencyHistoricalDTO {
 
-    public double amount;
-    public String base;
-    public String conversion;
-    public String startDate;
-    public String endDate;
-    public List<CurrencyRatesDTO> rates;
+    private double amount;
+    private String base;
+    private String conversion;
+    private String startDate;
+    private String endDate;
+    private List<CurrencyRatesDTO> rates;
 
 }

@@ -1,17 +1,20 @@
 package com.capitalmarkets.app.dto.data;
 
-import com.capitalmarkets.app.dto.data.ExceptionDTO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Data
 public class UserDTO extends ExceptionDTO {
 
-    public String mail;
-    public String name;
-    public String dni;
-    public String password;
+    private String mail;
+    private String name;
+    private String dni;
+    private String password;
 
     public UserDTO(String exception){
         super(exception);

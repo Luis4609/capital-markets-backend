@@ -1,16 +1,14 @@
 package com.capitalmarkets.app.dto.integration;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @ToString
+@Data
 public class CurrencyApiDTO {
 
-    public String code;
-    public String name;
+    private String code;
+    private String name;
 }

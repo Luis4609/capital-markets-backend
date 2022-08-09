@@ -5,7 +5,6 @@ import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ICurrencyAdapter {
 

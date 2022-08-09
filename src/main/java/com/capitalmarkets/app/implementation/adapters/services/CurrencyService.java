@@ -1,4 +1,4 @@
-package com.capitalmarkets.app.implementation.services;
+package com.capitalmarkets.app.implementation.adapters.services;
 
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;

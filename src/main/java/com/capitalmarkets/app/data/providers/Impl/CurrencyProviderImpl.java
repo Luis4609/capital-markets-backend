@@ -9,9 +9,6 @@ import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-
 @Service
 @AllArgsConstructor
 public class CurrencyProviderImpl implements ICurrencyProvider {
@@ -33,19 +30,20 @@ public class CurrencyProviderImpl implements ICurrencyProvider {
                 .orElse(new CurrencyDTO("No se ha encontrado ese codigo"));
     }
 
-    public Collection<CurrencyDTO> getAll() {
-
-        return currencyDao.findAll().stream()
-                .map(mapper::mapToDto)
-                .collect(Collectors.toList());
-    }
+    /*ESTE METODO NO SE USA EN NINGUN LUGAR*/
+//    public Collection<CurrencyDTO> getAll() {
+//
+//        return currencyDao.findAll().stream()
+//                .map(mapper::mapToDto)
+//                .collect(Collectors.toList());
+//    }
 
 
     public CurrencyModel create(CurrencyApiDTO dto){
 
         CurrencyModel dto1=CurrencyModel.builder()
-                .code(dto.code)
-                .name(dto.name)
+                .code(dto.getCode())
+                .name(dto.getName())
                 .build();
 
         return currencyDao.save(dto1);

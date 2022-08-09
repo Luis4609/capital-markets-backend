@@ -27,16 +27,16 @@ public class CurrencyMapperTest {
         CurrencyModel currencyModel = new CurrencyModel(1, "EUR", "Euro");
         CurrencyDTO dto = currencyMapper.mapToDto(currencyModel);
         assertThat(dto).isNotNull();
-        assertThat(dto.code).isNotNull();
-        assertThat(dto.code).isNotEmpty();
-        assertThat(dto.code).isEqualTo("EUR");
-        assertThat(dto.code).isEqualToIgnoringCase("eur");
-        assertThat(dto.code).hasSize(3);
-        assertThat(dto.name).isNotNull();
-        assertThat(dto.name).isNotEmpty();
-        assertThat(dto.name).isEqualTo("Euro");
-        assertThat(dto.name).isEqualToIgnoringCase("euro");
-        assertThat(dto.name).isEqualTo("Euro");
+        assertThat(dto.getCode()).isNotNull();
+        assertThat(dto.getCode()).isNotEmpty();
+        assertThat(dto.getCode()).isEqualTo("EUR");
+        assertThat(dto.getCode()).isEqualToIgnoringCase("eur");
+        assertThat(dto.getCode()).hasSize(3);
+        assertThat(dto.getName()).isNotNull();
+        assertThat(dto.getName()).isNotEmpty();
+        assertThat(dto.getName()).isEqualTo("Euro");
+        assertThat(dto.getName()).isEqualToIgnoringCase("euro");
+        assertThat(dto.getName()).isEqualTo("Euro");
 
 
     }
