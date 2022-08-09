@@ -31,14 +31,16 @@ public class ICurrencyProviderTest {
     public void getCurrencyByNameTest() {
 
 
-        CurrencyDTO dto = iCurrencyProvider.getCurrencyByName("euro");
+        CurrencyDTO dto = iCurrencyProvider.getCurrencyByName("Euro");
 
 
-        assertThat(dto).isNotNull();
+      assertThat(dto).isNotNull();
         //assertThat(dto.getCode()).isNotEmpty();
-        assertThat(dto.code).isNotEmpty();
-        assertThat(dto.name).isEqualTo("euro");
+      assertThat(dto.code).isNotNull();
+       //assertThat(dto.code).isNotEmpty();
+        assertThat(dto.name).isEqualTo("Euro");
         //assertThat(dto.getName()).isEqualTo("euro");
+        assertThat(dto.name).isNotNull();
         assertThat(dto.name).isEqualToIgnoringCase("euro");
         //assertThat(dto.getName()).isEqualToIgnoringCase("euro");
 
@@ -76,20 +78,8 @@ public class ICurrencyProviderTest {
         assertThat(currencies).isNotEmpty();
         assertThat(currencies).isNotNull();
 
-        //ToDo
-//        List<CurrencyModel> mockupBD = new ArrayList<>();
-//        CurrencyModel currencyModel = new CurrencyModel(1, "EUR", "euro");
-//        CurrencyModel currencyModel2 = new CurrencyModel(2, "USD", "dollar");
-//        CurrencyModel currencyModel3 = new CurrencyModel(3, "JPN", "yen");
+
 //
-//        mockupBD.add(currencyModel);
-//        mockupBD.add(currencyModel2);
-//        mockupBD.add(currencyModel3);
-//
-//        for (CurrencyModel cm: mockupBD  ) {
-//            cm.
-//
-//        }
 
     }
 
@@ -97,13 +87,9 @@ public class ICurrencyProviderTest {
     @DisplayName(value = "Test4 -> Comprobar la construcción del currencyModel a partir del dto de la api y guarda la divisa en la BD.")
     public void createTest() {
 
-        CurrencyApiDTO currencyApiDTO = new CurrencyApiDTO("ABC", "abc");
+       // TODO
 
-        CurrencyModel cM = CurrencyModel.builder().code(currencyApiDTO.code).name(currencyApiDTO.name).build();
 
-        currencyDao.save(cM);
-
-        Collection<CurrencyDTO> currencies = iCurrencyProvider.getAll();
     }
 
 

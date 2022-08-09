@@ -22,29 +22,42 @@ public class CurrencyMapperTest {
     private CurrencyMapper currencyMapper;
 
     @Test
-    @DisplayName(value = "Test2 -> Test para comprobar el mappeo a DTO de las CurrencyModel")
+    @DisplayName(value = "Test1 -> Test para comprobar el mappeo a DTO de las CurrencyModel")
     public void MapperCurrencyToDTOTest(){
-
-        CurrencyModel currencyModel = new CurrencyModel(1, "EUR", "euro");
-
-        CurrencyDTO dto = new CurrencyDTO(currencyModel.getCode(), currencyModel.getName());
+        CurrencyModel currencyModel = new CurrencyModel(1, "EUR", "Euro");
+        CurrencyDTO dto = currencyMapper.mapToDto(currencyModel);
         assertThat(dto).isNotNull();
-        assertThat(dto).isEqualTo(new CurrencyDTO( "EUR", "euro"));
+        assertThat(dto.code).isNotNull();
+        assertThat(dto.code).isNotEmpty();
+        assertThat(dto.code).isEqualTo("EUR");
+        assertThat(dto.code).isEqualToIgnoringCase("eur");
+        assertThat(dto.code).hasSize(3);
+        assertThat(dto.name).isNotNull();
+        assertThat(dto.name).isNotEmpty();
+        assertThat(dto.name).isEqualTo("Euro");
+        assertThat(dto.name).isEqualToIgnoringCase("euro");
+        assertThat(dto.name).isEqualTo("Euro");
+
 
     }
 
     @Test
-    @DisplayName(value= "Test3 -> Comprobar que el DTO transforma a Entity")
+    @DisplayName(value= "Test2 -> Comprobar que el DTO transforma a Entity")
     public void MapperToEntityTest(){
-        CurrencyDTO currencyDTO = new CurrencyDTO( "EUR", "euro");
-        CurrencyModel currencyModel =new CurrencyModel(0, currencyDTO.code, currencyDTO.name );
+        CurrencyDTO currencyDTO = new CurrencyDTO( "EUR", "Euro");
+        CurrencyModel currencyModel =currencyMapper.mapToEntity(currencyDTO);
 
-        assertThat(currencyModel).isNotNull();
+       assertThat(currencyModel).isNotNull();
+       assertThat(currencyModel.getName()).isNotNull();
         assertThat(currencyModel.getName()).isNotEmpty();
+        assertThat(currencyModel.getName()).isEqualTo("Euro");
+        assertThat(currencyModel.getName()).isEqualToIgnoringCase("EURO");
+        assertThat(currencyModel.getCode()).isNotNull();
         assertThat(currencyModel.getCode()).isNotEmpty();
         assertThat(currencyModel.getCode()).isEqualTo("EUR");
-        assertThat(currencyModel.getName()).isEqualTo("euro");
-        assertThat(currencyModel).isEqualTo(new CurrencyModel( 0, "EUR", "euro"));
+        assertThat(currencyModel.getCode()).isEqualToIgnoringCase("eur");
+        assertThat(currencyModel.getCode()).hasSize(3);
+
     }
 
 }
