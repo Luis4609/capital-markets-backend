@@ -24,26 +24,15 @@ public class CurrencyHistoricalMapper implements Imapper {
     public CurrencyHistoricalDTO mapToDto(String s) {
 
         JsonNode json = objectJSON.readTree(s);
-        JsonNode rates = objectJSON.readTree(s);
-
-        CurrencyRatesDTO dtoss;
+        JsonNode rates = objectJSON.readTree(s).get("rates");
 
         CurrencyHistoricalDTO  dtos=CurrencyHistoricalDTO.builder()
-                .amount(json.get("amount").asDouble())
-                .base(json.get("base").asText())
-                .startDate(json.get("start_date").asText())
-                .endDate(json.get("end_date").asText())
-                .rates(  dtoss = CurrencyRatesDTO.builder()
-                        .result(rates.get("result").asDouble())
-                        .build();
-                        return dtoss;
-                        )
-                .build();
-
-
-                        //next().getValue().toString())
-
-
+                                    .amount(json.get("amount").asDouble())
+                                    .base(json.get("base").asText())
+                                    .startDate(json.get("start_date").asText())
+                                    .endDate(json.get("end_date").asText())
+                                    .rates(new CurrencyRatesDTO(rates.fields().next().getValue().fields().next().getValue().asDouble()))
+                                    .build();
 
         return dtos;
     }
