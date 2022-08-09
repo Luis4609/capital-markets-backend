@@ -1,10 +1,10 @@
-package com.capitalmarkets.app.implementation.adapters.Impl;
+package com.capitalmarkets.app.integration.adapters.Impl;
 
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
-import com.capitalmarkets.app.implementation.adapters.ICurrencyAdapter;
-import com.capitalmarkets.app.implementation.mappers.Imapper;
+import com.capitalmarkets.app.integration.adapters.ICurrencyAdapter;
+import com.capitalmarkets.app.integration.mappers.Imapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

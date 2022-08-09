@@ -12,19 +12,16 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest()
 class AppApplicationTests {
 
-	@LocalServerPort
-	private int port;
 
-	@Autowired
-	private TestRestTemplate restTemplate;
 
-	@Test
-	public void shouldPassIfStringMatches() throws Exception {
-		assertThat(restTemplate.getForObject("http://localhost:" + port + "/currencies/list-string",
-				String.class)).contains("Australian Dollar");
-	}
+     @Test
+	 public  void contextLoads(){
+
+
+	 }
+
 
 }

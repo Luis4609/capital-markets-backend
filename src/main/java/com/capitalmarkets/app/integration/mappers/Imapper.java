@@ -1,4 +1,4 @@
-package com.capitalmarkets.app.implementation.mappers;
+package com.capitalmarkets.app.integration.mappers;
 
 import java.util.List;
 

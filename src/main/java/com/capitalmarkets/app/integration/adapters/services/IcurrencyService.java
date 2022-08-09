@@ -1,4 +1,4 @@
-package com.capitalmarkets.app.implementation.adapters;
+package com.capitalmarkets.app.integration.adapters.services;
 
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
@@ -6,12 +6,10 @@ import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
 
 import java.util.List;
 
-public interface ICurrencyAdapter {
+public interface IcurrencyService {
 
     List<CurrencyApiDTO> getAll();
 
     CurrencyConverterDTO getConversion(int value, String base, String conversion);
-
     CurrencyHistoricalDTO getHistorical(String date, int value, String base, String conversion);
-
 }
