@@ -2,6 +2,7 @@ package com.capitalmarkets.app.implementation.services;
 
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
+import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
 import com.capitalmarkets.app.implementation.adapters.ICurrencyAdapter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,9 @@ public class CurrencyService implements IcurrencyService{
     @Override
     public CurrencyConverterDTO getConversion(int value, String base, String conversion) {
         return iCurrencyAdapter.getConversion(value, base, conversion);
+    }
+    @Override
+    public CurrencyHistoricalDTO getHistorical(String date, int value, String base, String conversion){
+        return iCurrencyAdapter.getHistorical(date, value, base, conversion);
     }
 }

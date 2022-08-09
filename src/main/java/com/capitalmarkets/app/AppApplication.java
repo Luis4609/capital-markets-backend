@@ -3,6 +3,7 @@ package com.capitalmarkets.app;
 import com.capitalmarkets.app.data.providers.ICurrencyProvider;
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
+import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
 import com.capitalmarkets.app.implementation.adapters.ICurrencyAdapter;
 import com.capitalmarkets.app.implementation.services.IcurrencyService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,11 +34,15 @@ public class AppApplication {
 				log.info(currencyApiDTO.toString());
 			}
 
-			CurrencyConverterDTO prueba = adapter.getConversion(10,"GBP","USD");
-				log.info(prueba.toString());
+			//CurrencyConverterDTO prueba = adapter.getConversion(10,"GBP","USD");
+				//log.info(prueba.toString());
 
-				CurrencyConverterDTO prueba2=service.getConversion(10,"GBP","USD");
-				log.info(prueba2.toString());
+				//CurrencyConverterDTO prueba2=service.getConversion(10,"GBP","USD");
+				//log.info(prueba2.toString());
+
+			CurrencyHistoricalDTO prueba3 = adapter.getHistorical("2022-01-01",5,"EUR","GBP");
+			log.info("probando historical"+prueba3);
 		};
+
 	}
 }
