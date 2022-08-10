@@ -1,9 +1,6 @@
 package com.capitalmarkets.app.dto.integration;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @ToString
+@Data
 public class CurrencyHistoricalDTO {
 
     private double amount;
