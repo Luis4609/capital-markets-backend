@@ -46,7 +46,7 @@ public class CurrencyAdapter implements ICurrencyAdapter {
     }
 
     @Override
-    public CurrencyHistoricalDTO getHistorical(String date, int value, String base, String conversion) {
+    public CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion) {
 
         restTemplate.getForObject(url+date+"..?amount="+value+"&from="+base+"&to="+conversion,String.class);
         log.info(restTemplate.getForObject(url+date+"..?amount="+value+"&from="+base+"&to="+conversion,String.class));

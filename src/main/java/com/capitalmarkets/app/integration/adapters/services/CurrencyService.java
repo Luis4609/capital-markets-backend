@@ -25,7 +25,7 @@ public class CurrencyService implements IcurrencyService{
         return iCurrencyAdapter.getConversion(value, base, conversion);
     }
     @Override
-    public CurrencyHistoricalDTO getHistorical(String date, int value, String base, String conversion){
+    public CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion){
         return iCurrencyAdapter.getHistorical(date, value, base, conversion);
     }
 }

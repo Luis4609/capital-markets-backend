@@ -8,6 +8,9 @@ import com.capitalmarkets.app.dto.data.UserDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class UserProviderImpl implements IUserProvider {
@@ -28,4 +31,25 @@ public class UserProviderImpl implements IUserProvider {
                 .map(mapper::mapToDto)
                 .orElse(new UserDTO("No existe un usuario con ese mail"));
     }
+
+    @Override
+    public void createUser(UserDTO userDTO) {
+        UserModel userModel= UserModel.builder()
+                .dni(userDTO.getDni())
+                .name(userDTO.getName())
+                .surname(userDTO.getSurname())
+                .mail(userDTO.getMail())
+                .password(userDTO.getPassword())
+                .build();
+
+        userDao.save(userModel);
+    }
+
+    @Override
+    public Collection<UserDTO> getAllUsers() {
+
+        return userDao.findAll().stream().map(mapper::mapToDto).collect(Collectors.toList());
+    }
+
+
 }

@@ -5,41 +5,45 @@ import com.capitalmarkets.app.dto.data.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserRestController {
 
- /*   @Autowired
-    private IuserControllerService iuserControllerService;*/
+    @Autowired
+    private IuserControllerService iuserControllerService;
 
-    //Registrar nuevo usuario
-        //1Comprobar que el usuario existe o no
-      // 2Si no existe se guarda
-    // si existe mandar mensaje a front
+    @PostMapping("/register")
 
-    @GetMapping("/register")
-    @ResponseBody
-    public String  registerUser(@RequestBody UserDTO userDTO){
-        //comprobar si existe
+    public String registerUser(@RequestBody UserDTO userDTO) {
+        iuserControllerService.register(userDTO);
 
 
-
-
-            return  "";
+        return "creado";
     }
 
 
+    @GetMapping("/findUser")
+    public boolean findUserByMail(@RequestBody String mail) {
 
-@GetMapping("/findUser")
-    public void findUserByMail (@RequestParam(value = "mail") String mail){
+        if (iuserControllerService.findByMail(mail) != null) {
+            System.out.println(iuserControllerService.findByMail(mail));
+            return true;
+        }
+
+        return false;
+
+    }
 
 
+    @GetMapping("/findAll")
+    public List<UserDTO> getAll() {
+
+        return iuserControllerService.getAllUsers();
 
 
-
-}
-
-
+    }
 
 
 }

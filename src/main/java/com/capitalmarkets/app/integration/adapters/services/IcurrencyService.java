@@ -11,5 +11,5 @@ public interface IcurrencyService {
     List<CurrencyApiDTO> getAll();
 
     CurrencyConverterDTO getConversion(int value, String base, String conversion);
-    CurrencyHistoricalDTO getHistorical(String date, int value, String base, String conversion);
+    CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion);
 }
