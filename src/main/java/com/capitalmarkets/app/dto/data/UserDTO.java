@@ -11,9 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserDTO extends ExceptionDTO {
 
-    private String mail;
+
     private String name;
+    private String surname;
     private String dni;
+    private String mail;
     private String password;
 
     public UserDTO(String exception){

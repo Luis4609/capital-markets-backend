@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "USERS")
 public class UserModel {
 
@@ -30,6 +31,5 @@ public class UserModel {
     private String password;
 
 
-    public UserModel(int i, String name, String mail, String password, String dni) {
-    }
+
 }

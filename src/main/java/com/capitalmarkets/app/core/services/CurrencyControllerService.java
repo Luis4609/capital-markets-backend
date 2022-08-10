@@ -28,7 +28,7 @@ public class CurrencyControllerService implements IcurrencyControllerService{
     }
 
     @Override
-    public CurrencyHistoricalDTO getHistorical(String date, int value, String base, String conversion){
+    public CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion){
         return servicio.getHistorical(date, value, base, conversion);
     }
 }
