@@ -6,6 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Data
+@ToString
 public class CurrencyDTO extends ExceptionDTO {
 
     private String code;
@@ -13,13 +14,6 @@ public class CurrencyDTO extends ExceptionDTO {
 
     public CurrencyDTO(String exception){
         super(exception);
-    }
-    @Override
-    public String toString() {
-        return "CurrencyDTO{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                '}';
     }
 
 
