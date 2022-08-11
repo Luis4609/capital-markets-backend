@@ -1,5 +1,6 @@
 package com.capitalmarkets.app.core.services;
 
+import com.capitalmarkets.app.dto.core.LoginDTO;
 import com.capitalmarkets.app.dto.data.UserDTO;
 import java.util.List;
 
@@ -12,5 +13,8 @@ public interface IuserControllerService {
     List<UserDTO> getAllUsers();
 
     UserDTO findByMail(String mail);
+
+    UserDTO  verifyPassword(LoginDTO loginDTO);
+
 
 }

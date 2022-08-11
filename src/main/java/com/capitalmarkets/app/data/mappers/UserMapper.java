@@ -10,13 +10,13 @@ public class UserMapper implements Imapper<UserModel, UserDTO> {
 
     @Override
     public UserDTO mapToDto(UserModel userModel) {
-        UserDTO dto = new UserDTO(userModel.getName(), userModel.getMail(), userModel.getPassword(), userModel.getDni(), userModel.getSurname());
+        UserDTO dto = new UserDTO(userModel.getName(), userModel.getSurname(),  userModel.getDni(), userModel.getMail(),userModel.getPassword());
         return dto;
     }
 
     @Override
     public UserModel mapToEntity(UserDTO userDTO) {
-        UserModel um = new UserModel(0, userDTO.getName(), userDTO.getMail(), userDTO.getPassword(), userDTO.getDni(), userDTO.getSurname());
+        UserModel um = new UserModel(0, userDTO.getName(), userDTO.getSurname() , userDTO.getDni(), userDTO.getMail(),userDTO.getPassword());
         return um;
     }
 }
