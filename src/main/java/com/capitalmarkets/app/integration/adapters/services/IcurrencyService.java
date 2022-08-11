@@ -10,6 +10,6 @@ public interface IcurrencyService {
 
     List<CurrencyApiDTO> getAll();
 
-    CurrencyConverterDTO getConversion(int value, String base, String conversion);
+    CurrencyConverterDTO getConversion(double value, String base, String conversion);
     CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion);
 }

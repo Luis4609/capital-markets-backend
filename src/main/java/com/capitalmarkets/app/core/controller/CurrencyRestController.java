@@ -33,7 +33,7 @@ public class CurrencyRestController {
     }
 
     @GetMapping("/historical")
-    public CurrencyHistoricalDTO getHistorical(String date, int value, String base, String conversion) throws IOException {
+    public CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion) throws IOException {
 
         String filePath = "capitalmarkets\\src\\main\\resources\\copy\\historical.txt";
         FileOutputStream f = new FileOutputStream(filePath, true);

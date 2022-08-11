@@ -35,7 +35,7 @@ public class AppApplication {
             }
 
 
-            CurrencyConverterDTO prueba2 = service.getConversion(10, "GBP", "USD");
+            CurrencyConverterDTO prueba2 = service.getConversion(10.5, "GBP", "USD");
             log.info(prueba2.toString());
 
             CurrencyHistoricalDTO prueba3 = service.getHistorical("2022-01-01", 5, "EUR", "GBP");
