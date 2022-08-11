@@ -37,7 +37,7 @@ public class CurrencyAdapter implements ICurrencyAdapter {
 
 
     @Override
-    public CurrencyConverterDTO getConversion(int value, String base, String conversion) {
+    public CurrencyConverterDTO getConversion(double value, String base, String conversion) {
 
         restTemplate.getForObject(url+"latest?amount="+value+"&from="+base+"&to="+conversion,String.class);
         log.info(restTemplate.getForObject(url+"latest?amount="+value+"&from="+base+"&to="+conversion,String.class));

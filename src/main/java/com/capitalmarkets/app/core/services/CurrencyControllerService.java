@@ -23,7 +23,7 @@ public class CurrencyControllerService implements IcurrencyControllerService{
     }
 
     @Override
-    public CurrencyConverterDTO getConversion(int value, String base, String conversion) {
+    public CurrencyConverterDTO getConversion(double value, String base, String conversion) {
         return servicio.getConversion(value,base,conversion);
     }
 
