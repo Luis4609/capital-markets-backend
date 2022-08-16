@@ -1,7 +1,9 @@
 package com.capitalmarkets.app.core.controller;
 
 import com.capitalmarkets.app.core.services.IuserControllerService;
+import com.capitalmarkets.app.dto.core.LoginDTO;
 import com.capitalmarkets.app.dto.data.UserDTO;
+import com.capitalmarkets.app.dto.data.UserWithOutPassDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,36 +16,31 @@ public class UserRestController {
     @Autowired
     private IuserControllerService iuserControllerService;
 
+
+
     @PostMapping("/register")
-
-    public String registerUser(@RequestBody UserDTO userDTO) {
-        iuserControllerService.register(userDTO);
-
-
-        return "creado";
-    }
-
-
-    @GetMapping("/findUser")
-    public boolean findUserByMail(@RequestBody String mail) {
-
-        if (iuserControllerService.findByMail(mail) != null) {
-            System.out.println(iuserControllerService.findByMail(mail));
-            return true;
+    public UserWithOutPassDTO registerUser(@RequestBody UserDTO userDTO) {
+        if (iuserControllerService.findByMail(userDTO.getMail()) == null) {
+            return null;
         }
-
-        return false;
-
+        iuserControllerService.register(userDTO);
+        return iuserControllerService.userWithOutPassByMail(userDTO.getMail());
     }
 
-
+    //este método solo se utiliza para pruebas
+/*
     @GetMapping("/findAll")
     public List<UserDTO> getAll() {
-
         return iuserControllerService.getAllUsers();
 
-
     }
+*/
+
+    @GetMapping("/login")
+    public UserWithOutPassDTO login(@RequestBody LoginDTO loginDTO){
+
+        return iuserControllerService.verifyPassword(loginDTO);
+   }
 
 
 }

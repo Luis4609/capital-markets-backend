@@ -14,4 +14,6 @@ public interface IUserDao extends JpaRepository<UserModel, String> {
     Optional<UserModel> getByMail(String mail);
 
     void deleteByMail(String mail);
+
+    UserModel getByPassword(String password);
 }
