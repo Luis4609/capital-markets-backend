@@ -48,11 +48,11 @@ public class UserProviderImpl implements IUserProvider {
         userDao.save(userModel);
     }
 
-    @Override
+/*    @Override
     public Collection<UserDTO> getAllUsers() {
 
         return userDao.findAll().stream().map(mapper::mapToDto).collect(Collectors.toList());
-    }
+    }*/
 
     @Override
     public UserWithOutPassDTO userWithOutPass(String mail) {

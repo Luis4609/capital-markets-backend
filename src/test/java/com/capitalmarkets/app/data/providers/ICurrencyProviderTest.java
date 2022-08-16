@@ -14,41 +14,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest()
 public class ICurrencyProviderTest {
     @Autowired
-    private ICurrencyDao currencyDao;
-
-    @Autowired
     private ICurrencyProvider iCurrencyProvider;
-
 
 
     @Test
     @DisplayName(value = " Test1 -> Para recoger bien la divisa por su nombre.")
     public void getCurrencyByNameTest() {
-
-
         CurrencyDTO dto = iCurrencyProvider.getCurrencyByName("Euro");
-
-
-      assertThat(dto).isNotNull();
+        assertThat(dto).isNotNull();
         assertThat(dto.getCode()).isNotEmpty();
-
-        assertThat(dto.getName()).isEqualTo("euro");
-
+        assertThat(dto.getName()).isEqualTo("Euro");
         assertThat(dto.getName()).isEqualToIgnoringCase("euro");
-
-        //TODO
-
-
     }
 
     @Test
     @DisplayName(value = "Test2 -> Para comprobar que devuelve el nombre de una divisa por el código.")
     public void getCurrencyByCodeTest() {
-
         CurrencyDTO dto = iCurrencyProvider.getCurrencyByCode("EUR");
-
-
-
         assertThat(dto).isNotNull();
         assertThat(dto.getCode()).isNotEmpty();
         assertThat(dto.getCode()).isEqualTo("EUR");
@@ -69,13 +51,13 @@ public class ICurrencyProviderTest {
 
 //
 
- //   }
+    //   }
 
     @Test
     @DisplayName(value = "Test4 -> Comprobar la construcción del currencyModel a partir del dto de la api y guarda la divisa en la BD.")
     public void createTest() {
 
-       // TODO
+        // TODO
 
 
     }
