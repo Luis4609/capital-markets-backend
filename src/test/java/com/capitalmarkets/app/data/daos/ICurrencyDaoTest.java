@@ -10,14 +10,8 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest()
 public class ICurrencyDaoTest {
-
-
-
-
-
     @Autowired
     private ICurrencyDao iCurrencyDao;
-
     @Test
     void currencyGetByNameTest() {
         CurrencyModel currencyModel = new CurrencyModel(1, "EUR", "euro");
@@ -32,10 +26,7 @@ public class ICurrencyDaoTest {
         assertThat(currencyModel.getCode()).toString();
         assertThat(currencyModel.getCode()).asString();
 
-
-        //org.junit.jupiter.api.Assertions.assertEquals(Optional.of(currencyModel), iCurrencyDao.getByName("euro"));
     }
-
     @Test
     void currencyGetByCodeTest(){
         CurrencyModel currencyModel = new CurrencyModel( 1, "EUR", "euro");
