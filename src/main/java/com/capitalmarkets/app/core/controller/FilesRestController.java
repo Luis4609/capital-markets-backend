@@ -2,6 +2,14 @@ package com.capitalmarkets.app.core.controller;
 
 import com.capitalmarkets.app.core.services.IcurrencyControllerService;
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
+import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
+import com.capitalmarkets.app.dto.integration.CurrencyRatesDTO;
+import lombok.SneakyThrows;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -17,12 +25,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/files")
-public class FilesRestController {
+public class FilesRestController{
 
     @Autowired
     private IcurrencyControllerService controllerService;
@@ -115,7 +124,7 @@ public class FilesRestController {
 
 
 
-    @GetMapping("/historical")
+    @GetMapping("/txtHistorical")
     public String getHistoricalTxt(String date, double value, String base, String conversion) throws IOException {
 
         String filePath = "capitalmarkets\\src\\main\\resources\\files\\historical.txt";
@@ -127,5 +136,70 @@ public class FilesRestController {
 
         return "Historico creado en txt";
     }
-    
+
+    @SneakyThrows
+    @GetMapping("/pdfHistorical")
+    public String getHistoricalPdf(String start,String end,double value, String base, String conversion) throws IOException {
+
+
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage(PDRectangle.A4);
+        document.addPage(page);
+        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+        CurrencyHistoricalDTO texto =(controllerService.getInterval(start,end, value, base, conversion));
+
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 42);
+        contentStream.setLeading(14.5f);
+        contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 52);
+        contentStream.showText("DATOS DE CONVERSION");
+        contentStream.newLine();
+        contentStream.newLine();
+        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+        contentStream.showText("FECHA: ");
+        contentStream.newLine();
+        contentStream.showText("Desde: "+texto.getStartDate()+" Hasta: "+texto.getEndDate());
+        contentStream.newLine();
+        contentStream.showText("DE: ");
+        contentStream.showText(texto.getBase());
+        contentStream.newLine();
+        contentStream.showText("A: ");
+        contentStream.showText(texto.getTo());
+        contentStream.newLine();
+        contentStream.showText("VALOR ACTUAL: ");
+        contentStream.showText(texto.getConversion());
+        contentStream.newLine();
+        contentStream.newLine();
+        contentStream.showText("HISTORICO DE VALORES: ");
+        contentStream.newLine();
+        contentStream.newLine();
+
+        for(int i=0;i<texto.getRates().size();i++){
+
+            StringBuilder builder = new StringBuilder();
+            CurrencyRatesDTO o = texto.getRates().get(i);
+
+            for (Field field : texto.getRates().get(i).getClass().getDeclaredFields()) {
+                field.setAccessible(true);
+                builder.append(field.getName())
+                        .append(" = ")
+                        .append(field.get(o))
+                        .append("                                              ");
+            }
+
+            contentStream.showText(builder.toString());
+            contentStream.newLine();
+        }
+
+
+        //contentStream.showText(texto.getRates().toString());
+        //contentStream.showText((controllerService.getHistorical(date, value, base, conversion)).toString());
+        contentStream.endText();
+        contentStream.close();
+        document.save("capitalmarkets\\src\\main\\resources\\files\\historical.pdf");
+
+        return "Historico creado en pdf";
+    }
+
+
 }

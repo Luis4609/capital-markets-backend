@@ -30,6 +30,7 @@ public class CurrencyHistoricalMapper implements Imapper {
         CurrencyHistoricalDTO  dtos=CurrencyHistoricalDTO.builder()
                 .amount(json.get("amount").asDouble())
                 .base(json.get("base").asText())
+                .to(rates.fields().next().getValue().fields().next().getKey())
                 .conversion(rates.fields().next().getValue().fields().next().getValue().asText())
                 .startDate(json.get("start_date").asText())
                 .endDate(json.get("end_date").asText())
