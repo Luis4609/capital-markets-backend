@@ -51,7 +51,17 @@ public class CurrencyAdapter implements ICurrencyAdapter {
         restTemplate.getForObject(url+date+"..?amount="+value+"&from="+base+"&to="+conversion,String.class);
         log.info(restTemplate.getForObject(url+date+"..?amount="+value+"&from="+base+"&to="+conversion,String.class));
 
+
         return mapHist.mapToDto(restTemplate.getForObject(url+date+"..?amount="+value+"&from="+base+"&to="+conversion,String.class));
+    }
+
+    @Override
+    public CurrencyHistoricalDTO getInterval(String start, String end,double value, String base,String conversion) {
+
+
+        restTemplate.getForObject(url+start+".."+end+"?amount="+value+"&from="+base+"&to="+conversion,String.class,String.class);
+
+        return mapHist.mapToDto(restTemplate.getForObject(url+start+".."+end+"?amount="+value+"&from="+base+"&to="+conversion,String.class,String.class));
     }
 
 }
