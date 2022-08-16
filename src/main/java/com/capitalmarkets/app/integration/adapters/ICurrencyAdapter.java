@@ -14,4 +14,6 @@ public interface ICurrencyAdapter {
 
     CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion);
 
+    CurrencyHistoricalDTO getInterval(String start,String end,double value, String base,String conversion);
+
 }

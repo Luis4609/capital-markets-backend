@@ -4,7 +4,6 @@ import com.capitalmarkets.app.data.providers.ICurrencyProvider;
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
-import com.capitalmarkets.app.integration.adapters.ICurrencyAdapter;
 import com.capitalmarkets.app.integration.adapters.services.IcurrencyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -21,12 +20,9 @@ public class AppApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(ICurrencyAdapter adapter, IcurrencyService service, ICurrencyProvider prov) {
+    public CommandLineRunner runner(IcurrencyService service, ICurrencyProvider prov) {
         return args -> {
 
-
-            adapter.getAll();
-            adapter.getConversion(10, "GBP", "USD");
 
             for (CurrencyApiDTO currencyApiDTO : service.getAll()) {
 
@@ -40,9 +36,11 @@ public class AppApplication {
 
             CurrencyHistoricalDTO prueba3 = service.getHistorical("2022-01-01", 5, "EUR", "GBP");
             log.info(prueba3.toString());
+
+            CurrencyHistoricalDTO prueba4=service.getInterval("2022-01-01","2022-01-15",30,"USD","GBP");
+            log.info(prueba4.toString());
         };
 
     }
 }
 
-//Hola

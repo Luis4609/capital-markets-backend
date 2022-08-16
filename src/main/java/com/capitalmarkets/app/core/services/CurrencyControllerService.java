@@ -31,4 +31,9 @@ public class CurrencyControllerService implements IcurrencyControllerService{
     public CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion){
         return servicio.getHistorical(date, value, base, conversion);
     }
+
+    @Override
+    public CurrencyHistoricalDTO getInterval(String start, String end,double value, String base,String conversion) {
+        return servicio.getInterval(start,end,value,base,conversion);
+    }
 }

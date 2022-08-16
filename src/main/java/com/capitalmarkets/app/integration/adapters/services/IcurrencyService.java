@@ -12,4 +12,5 @@ public interface IcurrencyService {
 
     CurrencyConverterDTO getConversion(double value, String base, String conversion);
     CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion);
+    CurrencyHistoricalDTO getInterval(String start, String end,double value, String base, String conversion);
 }
