@@ -1,5 +1,6 @@
 package com.capitalmarkets.app.core.controller;
 
+import com.capitalmarkets.app.AppApplication;
 import com.capitalmarkets.app.core.services.IcurrencyControllerService;
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
@@ -10,31 +11,38 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jboss.jandex.Main;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/files")
-public class FilesRestController{
+public class FilesRestController {
 
     @Autowired
     private IcurrencyControllerService controllerService;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
 
 
     @GetMapping("/txtList-currencies")
@@ -123,7 +131,6 @@ public class FilesRestController{
     }
 
 
-
     @GetMapping("/txtHistorical")
     public String getHistoricalTxt(String date, double value, String base, String conversion) throws IOException {
 
@@ -139,45 +146,87 @@ public class FilesRestController{
 
     @SneakyThrows
     @GetMapping("/pdfHistorical")
-    public String getHistoricalPdf(String start,String end,double value, String base, String conversion) throws IOException {
+    public String getHistoricalPdf(String start, String end, double value, String base, String conversion) throws IOException {
+
 
 
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         document.addPage(page);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
-        CurrencyHistoricalDTO texto =(controllerService.getInterval(start,end, value, base, conversion));
+        CurrencyHistoricalDTO texto = (controllerService.getInterval(start, end, value, base, conversion));
+
+
+        cabeceraPdf(contentStream, page);
+        infoPdf(contentStream,texto);
+        datosPdf(contentStream,document,page,texto);
+
+        final Resource fileResource = resourceLoader.getResource("capitalmarkets\\src\\main\\resources\\img\\Capital_Markets-removebg-preview.png");
+
+        PDImageXObject image = PDImageXObject.createFromByteArray(document,fileResource.getInputStream().readAllBytes(), "CM logo");
+        contentStream.drawImage(image, 20, 20, image.getWidth() / 3, image.getHeight() / 3);
+
+        document.save("capitalmarkets\\src\\main\\resources\\files\\historical.pdf");
+
+        return "Historico creado en pdf";
+    }
+
+
+    @SneakyThrows
+    private void cabeceraPdf(PDPageContentStream contentStream, PDPage page) {
 
         contentStream.beginText();
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 42);
+        contentStream.setFont(PDType1Font.COURIER_BOLD, 42);
         contentStream.setLeading(14.5f);
-        contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 52);
+        contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 52);
         contentStream.showText("DATOS DE CONVERSION");
         contentStream.newLine();
         contentStream.newLine();
-        contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+    }
+
+    @SneakyThrows
+    private void infoPdf(PDPageContentStream contentStream,CurrencyHistoricalDTO texto) {
+
+        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
         contentStream.showText("FECHA: ");
         contentStream.newLine();
-        contentStream.showText("Desde: "+texto.getStartDate()+" Hasta: "+texto.getEndDate());
+        contentStream.setFont(PDType1Font.COURIER, 9);
+        contentStream.showText("Desde: " + texto.getStartDate() + " Hasta: " + texto.getEndDate());
         contentStream.newLine();
+        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
         contentStream.showText("DE: ");
+        contentStream.setFont(PDType1Font.COURIER, 9);
         contentStream.showText(texto.getBase());
         contentStream.newLine();
+        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
         contentStream.showText("A: ");
+        contentStream.setFont(PDType1Font.COURIER, 9);
         contentStream.showText(texto.getTo());
         contentStream.newLine();
+        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
         contentStream.showText("VALOR ACTUAL: ");
+        contentStream.setFont(PDType1Font.COURIER, 9);
         contentStream.showText(texto.getConversion());
         contentStream.newLine();
         contentStream.newLine();
+
+    }
+
+    @SneakyThrows
+    private void datosPdf(PDPageContentStream contentStream,PDDocument document, PDPage page,CurrencyHistoricalDTO texto){
+
+        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
         contentStream.showText("HISTORICO DE VALORES: ");
         contentStream.newLine();
         contentStream.newLine();
 
-        for(int i=0;i<texto.getRates().size();i++){
+        contentStream.setFont(PDType1Font.COURIER, 9);
+        int linea = 0;
+        for (int i = 0; i < texto.getRates().size(); i++) {
 
             StringBuilder builder = new StringBuilder();
             CurrencyRatesDTO o = texto.getRates().get(i);
+
 
             for (Field field : texto.getRates().get(i).getClass().getDeclaredFields()) {
                 field.setAccessible(true);
@@ -187,19 +236,34 @@ public class FilesRestController{
                         .append("                                              ");
             }
 
+            System.out.println("builder: " + builder.toString());
+
+            linea++;
+
+            if (linea == 40) {
+
+                contentStream.endText();
+                contentStream.close();
+
+                PDPage page1 = new PDPage(PDRectangle.A4);
+                document.addPage(page1);
+                contentStream = new PDPageContentStream(document, page1);
+                contentStream.beginText();
+                contentStream.setLeading(14.5f);
+                contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 52);
+                contentStream.setFont(PDType1Font.COURIER, 9);
+                contentStream.showText(builder.toString());
+
+                linea = 0;
+            }
+
             contentStream.showText(builder.toString());
             contentStream.newLine();
+
+
         }
 
-
-        //contentStream.showText(texto.getRates().toString());
-        //contentStream.showText((controllerService.getHistorical(date, value, base, conversion)).toString());
         contentStream.endText();
         contentStream.close();
-        document.save("capitalmarkets\\src\\main\\resources\\files\\historical.pdf");
-
-        return "Historico creado en pdf";
     }
-
-
 }
