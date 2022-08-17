@@ -21,12 +21,12 @@ public class UserControllerService implements IuserControllerService {
 
     }
 
-    @Override
+/*    @Override
     public List<UserDTO> getAllUsers() {
         return (List<UserDTO>) iUserProvider.getAllUsers();
 
 
-    }
+    }*/
 
     @Override
     public UserDTO findByMail(String mail) {

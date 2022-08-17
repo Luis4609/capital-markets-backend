@@ -10,7 +10,7 @@ public interface IUserProvider {
     UserDTO getUserByDni(String dni);
     UserDTO getUserByMail(String mail);
     void createUser(UserDTO userDTO);
-    Collection<UserDTO> getAllUsers();
+   // Collection<UserDTO> getAllUsers();
 
     UserWithOutPassDTO userWithOutPass(String mail);
 

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface IUserDao extends JpaRepository<UserModel, String> {
 
+    //Este método no se usa en ningún sitio
     Optional<UserModel[]> getByName(String name);
 
     Optional<UserModel> getByDni(String dni);
@@ -15,5 +16,5 @@ public interface IUserDao extends JpaRepository<UserModel, String> {
 
     void deleteByMail(String mail);
 
-    UserModel getByPassword(String password);
+
 }

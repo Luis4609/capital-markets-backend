@@ -16,13 +16,11 @@ public class UserRestController {
     @Autowired
     private IuserControllerService iuserControllerService;
 
-
-
     @PostMapping("/register")
     public UserWithOutPassDTO registerUser(@RequestBody UserDTO userDTO) {
-        if (iuserControllerService.findByMail(userDTO.getMail()) == null) {
-            return null;
-        }
+     /*   if (iuserControllerService.findByMail(userDTO.getMail()) == null) {
+            return new UserWithOutPassDTO("no existe ese email");
+        }*/
         iuserControllerService.register(userDTO);
         return iuserControllerService.userWithOutPassByMail(userDTO.getMail());
     }

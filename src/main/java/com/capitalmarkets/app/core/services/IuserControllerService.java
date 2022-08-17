@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface IuserControllerService {
     void register (UserDTO userDTO);
-   // List<UserDTO> getAllUsers();
-    List<UserDTO> getAllUsers();
+
+  /*  List<UserDTO> getAllUsers();*/
     UserDTO findByMail(String mail);
     UserWithOutPassDTO verifyPassword(LoginDTO loginDTO);
     UserWithOutPassDTO userWithOutPassByMail(String mail);
