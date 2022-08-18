@@ -6,6 +6,7 @@ import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyRatesDTO;
 import lombok.SneakyThrows;
+import lombok.Value;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -31,6 +32,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -43,7 +47,6 @@ public class FilesRestController {
 
     @Autowired
     private ResourceLoader resourceLoader;
-
 
     @GetMapping("/txtList-currencies")
     public String getCurrenciesTxtList() throws IOException {
@@ -149,24 +152,29 @@ public class FilesRestController {
     public String getHistoricalPdf(String start, String end, double value, String base, String conversion) throws IOException {
 
 
+        CurrencyHistoricalDTO texto = (controllerService.getInterval(start, end, value, base, conversion));
 
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         document.addPage(page);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
-        CurrencyHistoricalDTO texto = (controllerService.getInterval(start, end, value, base, conversion));
+
+
 
 
         cabeceraPdf(contentStream, page);
-        infoPdf(contentStream,texto);
+        infoPdf(contentStream,texto,page);
         datosPdf(contentStream,document,page,texto);
 
-        final Resource fileResource = resourceLoader.getResource("capitalmarkets\\src\\main\\resources\\img\\Capital_Markets-removebg-preview.png");
+//        final Resource fileResource = resourceLoader.getResource("classpath:./img/Capital_Markets-removebg-preview.png");
+//        PDImageXObject image = PDImageXObject.createFromByteArray(document,fileResource.getInputStream().readAllBytes(),"CM_logo");
+//        contentStream.drawImage(image, 50, 50);
 
-        PDImageXObject image = PDImageXObject.createFromByteArray(document,fileResource.getInputStream().readAllBytes(), "CM logo");
-        contentStream.drawImage(image, 20, 20, image.getWidth() / 3, image.getHeight() / 3);
+
 
         document.save("capitalmarkets\\src\\main\\resources\\files\\historical.pdf");
+
+
 
         return "Historico creado en pdf";
     }
@@ -182,12 +190,15 @@ public class FilesRestController {
         contentStream.showText("DATOS DE CONVERSION");
         contentStream.newLine();
         contentStream.newLine();
+        contentStream.endText();
     }
 
     @SneakyThrows
-    private void infoPdf(PDPageContentStream contentStream,CurrencyHistoricalDTO texto) {
+    private void infoPdf(PDPageContentStream contentStream,CurrencyHistoricalDTO texto,PDPage page) {
 
+        contentStream.beginText();
         contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
+        contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 100);
         contentStream.showText("FECHA: ");
         contentStream.newLine();
         contentStream.setFont(PDType1Font.COURIER, 9);
@@ -209,61 +220,70 @@ public class FilesRestController {
         contentStream.showText(texto.getConversion());
         contentStream.newLine();
         contentStream.newLine();
+        contentStream.endText();
 
     }
 
     @SneakyThrows
     private void datosPdf(PDPageContentStream contentStream,PDDocument document, PDPage page,CurrencyHistoricalDTO texto){
 
+        PDImageXObject pdImage = PDImageXObject.createFromFile("capitalmarkets/src/main/resources/img/Capital_Markets-removebg-preview.png",document);
+
+        contentStream.beginText();
         contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
+        contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 180);
         contentStream.showText("HISTORICO DE VALORES: ");
         contentStream.newLine();
         contentStream.newLine();
 
         contentStream.setFont(PDType1Font.COURIER, 9);
         int linea = 0;
-        for (int i = 0; i < texto.getRates().size(); i++) {
+            for (int i = 0; i < texto.getRates().size(); i++) {
 
-            StringBuilder builder = new StringBuilder();
-            CurrencyRatesDTO o = texto.getRates().get(i);
+                StringBuilder builder = new StringBuilder();
+                CurrencyRatesDTO o = texto.getRates().get(i);
 
 
-            for (Field field : texto.getRates().get(i).getClass().getDeclaredFields()) {
-                field.setAccessible(true);
-                builder.append(field.getName())
-                        .append(" = ")
-                        .append(field.get(o))
-                        .append("                                              ");
-            }
+                for (Field field : texto.getRates().get(i).getClass().getDeclaredFields()) {
+                    field.setAccessible(true);
+                    builder.append(field.getName())
+                            .append(" = ")
+                            .append(field.get(o))
+                            .append("                                              ");
+                }
 
-            System.out.println("builder: " + builder.toString());
+                System.out.println("builder: " + builder.toString());
 
-            linea++;
+                linea++;
 
-            if (linea == 40) {
+                if (linea == 35) {
 
-                contentStream.endText();
-                contentStream.close();
+                    contentStream.endText();
+                    contentStream.drawImage(pdImage, 410, 10,pdImage.getWidth() / 3, pdImage.getHeight() / 3);
+                    contentStream.close();
 
-                PDPage page1 = new PDPage(PDRectangle.A4);
-                document.addPage(page1);
-                contentStream = new PDPageContentStream(document, page1);
-                contentStream.beginText();
-                contentStream.setLeading(14.5f);
-                contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 52);
-                contentStream.setFont(PDType1Font.COURIER, 9);
+                    PDPage page1 = new PDPage(PDRectangle.A4);
+                    document.addPage(page1);
+                    contentStream = new PDPageContentStream(document, page1);
+                    contentStream.beginText();
+                    contentStream.setLeading(14.5f);
+                    contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 52);
+                    contentStream.setFont(PDType1Font.COURIER, 9);
+                    contentStream.showText(builder.toString());
+
+                    linea = 0;
+                }
+
                 contentStream.showText(builder.toString());
+                contentStream.newLine();
 
-                linea = 0;
+
             }
-
-            contentStream.showText(builder.toString());
-            contentStream.newLine();
-
-
-        }
 
         contentStream.endText();
+        contentStream.drawImage(pdImage, 410, 10,pdImage.getWidth() / 3, pdImage.getHeight() / 3);
         contentStream.close();
+
     }
+
 }
