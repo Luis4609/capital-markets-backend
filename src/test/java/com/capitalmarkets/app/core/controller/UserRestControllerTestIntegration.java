@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest()
-public class UserRestControllerTest {
+public class UserRestControllerTestIntegration {
     @Autowired
     private UserRestController userRestController;
 

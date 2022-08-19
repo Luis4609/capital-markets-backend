@@ -3,15 +3,13 @@ package com.capitalmarkets.app.data.mappers;
 import com.capitalmarkets.app.data.entities.UserModel;
 import com.capitalmarkets.app.dto.data.UserDTO;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest()
-public class UserMapperTest {
+public class UserMapperTestIntegration {
     @Autowired
     private UserMapper userMapper;
 

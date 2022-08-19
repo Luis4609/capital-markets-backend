@@ -1,7 +1,6 @@
 package com.capitalmarkets.app.data.providers;
 
 
-import com.capitalmarkets.app.data.daos.ICurrencyDao;
 import com.capitalmarkets.app.dto.data.CurrencyDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest()
-public class ICurrencyProviderTest {
+public class ICurrencyProviderTestIntegration {
     @Autowired
     private ICurrencyProvider iCurrencyProvider;
 

@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 
 
 @SpringBootTest()
-public class ICurrencyDaoTest {
+public class ICurrencyDaoTestIntegration {
     @Autowired
     private ICurrencyDao iCurrencyDao;
     @Test
