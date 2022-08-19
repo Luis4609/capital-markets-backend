@@ -1,6 +1,5 @@
 package com.capitalmarkets.app.data.providers;
 
-import com.capitalmarkets.app.data.entities.UserModel;
 import com.capitalmarkets.app.dto.data.UserDTO;
 import com.capitalmarkets.app.dto.data.UserWithOutPassDTO;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest()
-public class IUserProviderTest {
+public class IUserProviderTestIntegration {
     @Autowired
     private IUserProvider iUserProvider;
 

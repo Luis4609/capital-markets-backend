@@ -1,7 +1,6 @@
 package com.capitalmarkets.app.data.mappers;
 
 import com.capitalmarkets.app.data.entities.UserModel;
-import com.capitalmarkets.app.dto.data.UserDTO;
 import com.capitalmarkets.app.dto.data.UserWithOutPassDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @SpringBootTest()
-public class UserWithOutPassMapperTest {
+public class UserWithOutPassMapperTestIntegration {
     @Autowired
     private UserWithOutPassMapper userWithOutPassMapper;
 

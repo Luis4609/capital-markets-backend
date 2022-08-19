@@ -11,12 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = CurrencyMapper.class)
-public class CurrencyMapperTest {
+public class CurrencyMapperTestIntegration {
 
     @Autowired
     private CurrencyMapper currencyMapper;
