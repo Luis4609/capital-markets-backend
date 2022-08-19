@@ -2,6 +2,7 @@ package com.capitalmarkets.app.dto.integration;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -10,10 +11,11 @@ import java.util.List;
 @Builder
 @ToString
 @Data
-public class CurrencyHistoricalDTO {
+public class CurrencyHistoricalDTO implements Serializable {
 
     private double amount;
     private String base;
+    private String to;
     private String conversion;
     private String startDate;
     private String endDate;
