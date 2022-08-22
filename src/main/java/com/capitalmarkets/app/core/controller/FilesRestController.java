@@ -4,6 +4,24 @@ import com.capitalmarkets.app.core.services.IcurrencyControllerService;
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyRatesDTO;
+import com.itextpdf.io.font.constants.FontStyles;
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.borders.Border;
+import com.itextpdf.layout.borders.DoubleBorder;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.HorizontalAlignment;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.VerticalAlignment;
 import lombok.SneakyThrows;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -21,6 +39,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.Element;
+import javax.swing.text.StyleConstants;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -54,7 +75,7 @@ public class FilesRestController {
             map.put("path", filePath);
             map.put("status", HttpStatus.OK);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             map.put("Message", "Internal error");
             map.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -171,39 +192,45 @@ public class FilesRestController {
 
 
     @PostMapping("/pdfHistorical")
-    public HashMap<String, Object> getHistoricalPdf(@RequestBody CurrencyHistoricalDTO dto) throws IOException {
+    public HashMap<String, Object> getHistoricalPdf(@RequestBody CurrencyHistoricalDTO dto) throws IOException, IllegalAccessException {
 
         String path = "capitalmarkets\\src\\main\\resources\\files\\historical.pdf";
         CurrencyHistoricalDTO text = (controllerService.getInterval(dto.getStartDate(), dto.getEndDate(), dto.getAmount(), dto.getBase(), dto.getConversion()));
 
-        PDDocument document = new PDDocument();
-        PDPage page = new PDPage(PDRectangle.A4);
-        document.addPage(page);
-        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+        PdfDocument pdfDoc = new PdfDocument(new PdfWriter("capitalmarkets\\src\\main\\resources\\files\\historical.pdf"));
+        Document doc = new Document(pdfDoc);
+
+//        PDDocument document = new PDDocument();
+//        PDPage page = new PDPage(PDRectangle.A4);
+//        document.addPage(page);
+//        PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
 
-        headerPdf(contentStream, document, page);
-        infoPdf(contentStream, text, page);
-        dataPdf(contentStream, document, page, text);
+        infoPdf2(doc,text);
+        dataPdf2(doc,text);
+//        headerPdf(contentStream, document, page);
+//        infoPdf(contentStream, text, page);
+//        dataPdf(contentStream, document, page, text);
 
 
         HashMap<String, Object> map = new HashMap<>();
-        try {
+//        try {
+//
+//            document.save(path);
+//
+//            map.put("message", "The pdf was created");
+//            map.put("path", path);
+//            map.put("status", HttpStatus.OK);
+//
+//        } catch (Exception e) {
+//
+//            map.put("Message", "Internal error");
+//            map.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+//
+//        }
+//        return map;
 
-            document.save(path);
-
-            map.put("message", "The pdf was created");
-            map.put("path", path);
-            map.put("status", HttpStatus.OK);
-
-        } catch (Exception e) {
-
-            map.put("Message", "Internal error");
-            map.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
-
-        }
         return map;
-
     }
 
 
@@ -260,14 +287,16 @@ public class FilesRestController {
         PDImageXObject pdImage = PDImageXObject.createFromFile("capitalmarkets/src/main/resources/img/CM.png", document);
         PDImageXObject pdOptImage = PDImageXObject.createFromFile("capitalmarkets/src/main/resources/img/Optimissa.png", document);
 
+
         contentStream.beginText();
         contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
         contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 180);
         contentStream.showText("    HISTORICO DE VALORES: ");
         contentStream.newLine();
         contentStream.newLine();
-
         contentStream.setFont(PDType1Font.COURIER, 9);
+
+
         int line = 0;
         for (int i = 0; i < texto.getRates().size(); i++) {
 
@@ -320,4 +349,76 @@ public class FilesRestController {
 
     }
 
+
+    private void infoPdf2(Document doc,CurrencyHistoricalDTO texto) throws IOException {
+
+        Table tableAux = new Table(2);
+        tableAux.useAllAvailableWidth();
+
+        Table table = new Table(2);
+        table.setMarginTop(20);
+        table.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        PdfFont font = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
+        PdfFont bold = PdfFontFactory.createFont(StandardFonts.TIMES_BOLD);
+
+
+        table.addCell("Period");
+        table.addCell("From: "+texto.getStartDate()+" To: "+texto.getEndDate());
+        table.addCell("Base Currency");
+        table.addCell(texto.getBase());
+        table.addCell("Exchange currency");
+        table.addCell(texto.getTo());
+        table.addCell("Current value");
+        table.addCell(texto.getConversion());
+
+        table.getCell(0,0).setBackgroundColor(ColorConstants.LIGHT_GRAY).setFont(bold);
+        table.getCell(1,0).setBackgroundColor(ColorConstants.LIGHT_GRAY).setFont(bold);
+        table.getCell(2,0).setBackgroundColor(ColorConstants.LIGHT_GRAY).setFont(bold);
+        table.getCell(3,0).setBackgroundColor(ColorConstants.LIGHT_GRAY).setFont(bold);
+
+        tableAux.addCell(table).setVerticalAlignment(VerticalAlignment.MIDDLE);
+
+        Image img = new Image(ImageDataFactory.create("capitalmarkets/src/main/resources/img/CM.png"));
+        img.setWidth(120);
+        img.setHeight(120);
+        img.setMarginLeft(20);
+        tableAux.addCell(img).setHorizontalAlignment(HorizontalAlignment.CENTER);
+
+
+        doc.add(tableAux);
+    }
+
+    private void dataPdf2(Document doc,CurrencyHistoricalDTO texto) throws FileNotFoundException, IllegalAccessException {
+
+
+        Table table = new Table(2);
+        table.setMarginTop(20);
+        table.useAllAvailableWidth();
+        table.setBorder(new DoubleBorder(ColorConstants.BLACK,4));
+        table.addCell("Date");
+        table.addCell("Value");
+        table.getCell(0,0).setBackgroundColor(ColorConstants.GRAY,3).setTextAlignment(TextAlignment.CENTER);
+        table.getCell(0,1).setBackgroundColor(ColorConstants.GRAY,3).setTextAlignment(TextAlignment.CENTER);
+
+        for (int i = 0; i < texto.getRates().size(); i++) {
+
+            StringBuilder builder = new StringBuilder();
+            CurrencyRatesDTO o = texto.getRates().get(i);
+
+
+            for (Field field : texto.getRates().get(i).getClass().getDeclaredFields()) {
+                field.setAccessible(true);
+
+                table.addCell(field.get(o).toString()).setBackgroundColor(ColorConstants.LIGHT_GRAY,3).setTextAlignment(TextAlignment.CENTER);;
+
+            }
+
+        }
+
+        doc.add(table);
+        doc.close();
+
+    }
+
 }
+
