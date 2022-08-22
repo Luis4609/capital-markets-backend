@@ -3,16 +3,20 @@ package com.capitalmarkets.app.core.service;
 
 import com.capitalmarkets.app.core.controller.UserRestController;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.capitalmarkets.app.core.services.UserControllerService;
 import com.capitalmarkets.app.dto.data.UserDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
+
 @SpringBootTest
 public class UserControllerServiceTestIntegration {
 
     @Autowired
-    private UserRestController userRestController;
+    private UserControllerService userControllerService;
 
 
     @Test
@@ -34,6 +38,13 @@ public class UserControllerServiceTestIntegration {
             assertThat(userdto.getName()).isEqualToNormalizingPunctuationAndWhitespace("Luis");
             assertThat(userdto.getSurname()).isEqualToNormalizingPunctuationAndWhitespace("Monzón");
             assertThat(userdto.getDni()).endsWith("Y");
+            assertThat(userdto.getDni()).containsPattern( "^[0-9]{8}[A-Z]{1}$");
+            assertThat(userdto.getMail()).containsPattern("^(.+)@(.+)$");
+            assertThat(userdto.getDni()).toString();
+            assertThat(userdto.getDni()).asString();
+            assertThat(userdto.getMail()).toString();
+            assertThat(userdto.getMail()).asString();
+            assertThat(userdto.getMail()).isEqualToIgnoringCase("LUIS@gmail.com");
             //assertThat(userdto.getMail()).hasSizeBetween(4, 8);
 
     }
@@ -45,12 +56,15 @@ public class UserControllerServiceTestIntegration {
             assertThat(userDTO).isNotNull();
             assertThat(userDTO.getMail()).isNotNull();
             assertThat(userDTO.getMail()).isNotEmpty();
-            assertThat(userDTO.getMail()).isEqualToIgnoringCase("luis@gmail.com");
+            assertThat(userDTO.getMail()).isEqualToIgnoringCase("LUIS@gmail.com");
             assertThat(userDTO.getMail()).isEqualToNormalizingPunctuationAndWhitespace("luis@gmail.com");
+            assertThat(userDTO.getMail()).toString();
+            assertThat(userDTO.getMail()).asString();
+            assertThat(userDTO.getMail()).containsPattern("^(.+)@(.+)$");
     }
 
     @Test
-    public void verifyPasswordTest(){
+    public void verifyPasswordTestOK(){
         UserDTO userDTO = new UserDTO("Luis", "Monzón", "50540431Y", "luis@gmail.com", "1234");
 
             assertThat(userDTO).isNotNull();
@@ -58,5 +72,8 @@ public class UserControllerServiceTestIntegration {
             assertThat(userDTO.getPassword()).isNotNull();
             assertThat(userDTO.getPassword()).isEqualToNormalizingPunctuationAndWhitespace("1234");
             assertThat(userDTO.getPassword()).hasSizeBetween(4, 8);
+            assertThat(userDTO.getPassword()).toString();
+            assertThat(userDTO.getPassword()).asString();
+            //assertThat(userDTO.getPassword()).containsPattern();
     }
 }

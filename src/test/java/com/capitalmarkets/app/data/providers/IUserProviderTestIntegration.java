@@ -14,18 +14,17 @@ public class IUserProviderTestIntegration {
     private IUserProvider iUserProvider;
 
     @Test
-    public void getUserByDniTest(){
-        UserDTO dto= iUserProvider.getUserByDni("69696969V");
+    public void getUserByDniTest() {
+        UserDTO dto = iUserProvider.getUserByDni("69696969V");
         assertThat(dto).isNotNull();
         assertThat(dto.getDni()).isNotEmpty();
         assertThat(dto.getDni()).isEqualToIgnoringCase("69696969v");
         assertThat(dto.getDni()).isEqualTo("69696969V");
-
-
     }
+
     @Test
-    public void getUserByMailTest(){
-        UserDTO dto=iUserProvider.getUserByMail("celia@email.com");
+    public void getUserByMailTest() {
+        UserDTO dto = iUserProvider.getUserByMail("celia@email.com");
         assertThat(dto).isNotNull();
         assertThat(dto.getMail()).isNotEmpty();
         assertThat(dto.getMail()).isEqualToIgnoringCase("CELIA@email.com");
@@ -34,20 +33,19 @@ public class IUserProviderTestIntegration {
     }
 
     @Test
-    public void createUserTest(){
-        UserDTO userDTO=new UserDTO("Celia","Salamanca","12345678B","celia@email.com","E1232");
-      //   iUserProvider.createUser(userDTO);
+    public void createUserTest() {
+        UserDTO userDTO = new UserDTO("Celia", "Salamanca", "12345678B", "celia@email.com", "E1232");
+        iUserProvider.createUser(userDTO);
 
         //TODO
 
 
     }
 
-
     @Test
-    public void userWithOutPassTest(){
-        String mail="celia@email.com";
-        UserWithOutPassDTO userWithOutPassDTO=iUserProvider.userWithOutPass(mail);
+    public void userWithOutPassTest() {
+        String mail = "celia@email.com";
+        UserWithOutPassDTO userWithOutPassDTO = iUserProvider.userWithOutPass(mail);
         assertThat(userWithOutPassDTO).isNotNull();
         assertThat(userWithOutPassDTO.getDni()).isNotNull();
         assertThat(userWithOutPassDTO.getDni()).isNotEmpty();
@@ -60,6 +58,5 @@ public class IUserProviderTestIntegration {
         assertThat(userWithOutPassDTO.getMail()).isEqualToIgnoringCase("CELIA@email.com");
         assertThat(userWithOutPassDTO.getMail()).isEqualTo("celia@email.com");
     }
-
 
 }
