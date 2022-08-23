@@ -19,14 +19,7 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.VerticalAlignment;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -41,7 +34,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -195,20 +187,8 @@ public class FilesRestController {
         String path = "capitalmarkets\\src\\main\\resources\\files\\historical.pdf";
         CurrencyHistoricalDTO text = (controllerService.getInterval(dto.getStartDate(), dto.getEndDate(), dto.getAmount(), dto.getBase(), dto.getConversion()));
 
-        PdfDocument pdfDoc = new PdfDocument(new PdfWriter("capitalmarkets\\src\\main\\resources\\files\\historical.pdf"));
+        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(path));
         Document doc = new Document(pdfDoc);
-
-
-//        PDDocument document = new PDDocument();
-//        PDPage page = new PDPage(PDRectangle.A4);
-//        document.addPage(page);
-//        PDPageContentStream contentStream = new PDPageContentStream(document, page);
-
-
-//        headerPdf(contentStream, document, page);
-//        infoPdf(contentStream, text, page);
-//        dataPdf(contentStream, document, page, text);
-
 
         HashMap<String, Object> map = new HashMap<>();
         try {
@@ -372,7 +352,7 @@ public class FilesRestController {
         table.addCell("Current value");
         table.addCell(text.getConversion()).setFont(font);
 
-        for(int i=0;i<4;i++) {
+        for (int i = 0; i < 4; i++) {
 
             table.getCell(i, 0).setBackgroundColor(ColorConstants.LIGHT_GRAY).setFont(bold);
         }
@@ -384,11 +364,10 @@ public class FilesRestController {
         img.setMarginLeft(20);
         tableAux.addCell(img).setHorizontalAlignment(HorizontalAlignment.CENTER);
 
-
         doc.add(tableAux);
     }
 
-    private void dataPdf2(Document doc, CurrencyHistoricalDTO texto) throws  IOException {
+    private void dataPdf2(Document doc, CurrencyHistoricalDTO texto) throws IOException {
 
         PdfFont font = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
         PdfFont bold = PdfFontFactory.createFont(StandardFonts.TIMES_BOLD);
@@ -426,7 +405,6 @@ public class FilesRestController {
         doc.close();
 
     }
-
-
+    
 }
 

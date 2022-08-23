@@ -1,10 +1,7 @@
 package com.capitalmarkets.app;
 
-import com.capitalmarkets.app.core.controller.EmailService;
+import com.capitalmarkets.app.core.services.EmailService;
 import com.capitalmarkets.app.data.providers.ICurrencyProvider;
-import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
-import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
-import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
 import com.capitalmarkets.app.integration.adapters.services.IcurrencyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -21,10 +18,10 @@ public class AppApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(IcurrencyService service, ICurrencyProvider prov, EmailService prueba1) {
+    public CommandLineRunner runner(IcurrencyService service, ICurrencyProvider prov, EmailService emailService) {
         return args -> {
 
-            prueba1.send("andres.ramos@optimissa.com","Prueba","Hola");
+            emailService.send("andres.ramos@optimissa.com","Prueba","Hola");
 
             /*for (CurrencyApiDTO currencyApiDTO : service.getAll()) {
 

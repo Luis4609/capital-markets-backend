@@ -10,7 +10,6 @@ import org.apache.commons.lang3.builder.ToStringExclude;
 @Data
 public class UserDTO extends ExceptionDTO {
 
-
     private String name;
     private String surname;
     private String dni;

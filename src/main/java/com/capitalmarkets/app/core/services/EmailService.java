@@ -1,5 +1,6 @@
-package com.capitalmarkets.app.core.controller;
+package com.capitalmarkets.app.core.services;
 
+import com.capitalmarkets.app.core.services.IEmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

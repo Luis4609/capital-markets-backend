@@ -1,4 +1,4 @@
-package com.capitalmarkets.app.core.controller;
+package com.capitalmarkets.app.core.services;
 
 public interface IEmailService {
 
