@@ -2,16 +2,16 @@ package com.capitalmarkets.app.data.entities;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest()
 public class CurrencyModelTestIntegration {
 
 
-
     @Test
-     void idAutoIncrementTest(){
-        CurrencyModel currencyModel1 = new CurrencyModel( 1, "EUR", "euro");
+    void idAutoIncrementTest() {
+        CurrencyModel currencyModel1 = new CurrencyModel(1, "EUR", "euro");
 
 
         assertThat(currencyModel1.getId()).isNotZero();
@@ -21,8 +21,9 @@ public class CurrencyModelTestIntegration {
 
 
     }
+
     @Test
-    void nameTest(){
+    void nameTest() {
         CurrencyModel currencyModel = new CurrencyModel(1, "EUR", "euro");
 
 

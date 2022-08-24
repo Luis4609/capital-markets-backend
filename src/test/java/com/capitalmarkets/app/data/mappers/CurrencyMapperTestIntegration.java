@@ -9,7 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = CurrencyMapper.class)
@@ -20,7 +21,7 @@ public class CurrencyMapperTestIntegration {
 
     @Test
     @DisplayName(value = "Test1 -> Test para comprobar el mappeo a DTO de las CurrencyModel")
-    public void MapperCurrencyToDTOTest(){
+    public void MapperCurrencyToDTOTest() {
         CurrencyModel currencyModel = new CurrencyModel(1, "EUR", "Euro");
         CurrencyDTO dto = currencyMapper.mapToDto(currencyModel);
         assertThat(dto).isNotNull();
@@ -39,13 +40,13 @@ public class CurrencyMapperTestIntegration {
     }
 
     @Test
-    @DisplayName(value= "Test2 -> Comprobar que el DTO transforma a Entity")
-    public void MapperToEntityTest(){
-        CurrencyDTO currencyDTO = new CurrencyDTO( "EUR", "Euro");
-        CurrencyModel currencyModel =currencyMapper.mapToEntity(currencyDTO);
+    @DisplayName(value = "Test2 -> Comprobar que el DTO transforma a Entity")
+    public void MapperToEntityTest() {
+        CurrencyDTO currencyDTO = new CurrencyDTO("EUR", "Euro");
+        CurrencyModel currencyModel = currencyMapper.mapToEntity(currencyDTO);
 
-       assertThat(currencyModel).isNotNull();
-       assertThat(currencyModel.getName()).isNotNull();
+        assertThat(currencyModel).isNotNull();
+        assertThat(currencyModel.getName()).isNotNull();
         assertThat(currencyModel.getName()).isNotEmpty();
         assertThat(currencyModel.getName()).isEqualTo("Euro");
         assertThat(currencyModel.getName()).isEqualToIgnoringCase("EURO");

@@ -16,9 +16,9 @@ public class UserWithOutPassMapperTestIntegration {
 
 
     @Test
-    public void UserWOPassMapperToDTOTest(){
-    UserModel userModel=new UserModel(0,"Celia","Salamanca","12345678B","celia@email.com","E1232");
-    UserWithOutPassDTO userWithOutPassDTO=userWithOutPassMapper.mapToDto(userModel);
+    public void UserWOPassMapperToDTOTest() {
+        UserModel userModel = new UserModel(0, "Celia", "Salamanca", "12345678B", "celia@email.com", "E1232");
+        UserWithOutPassDTO userWithOutPassDTO = userWithOutPassMapper.mapToDto(userModel);
         assertThat(userWithOutPassDTO).isNotNull();
         assertThat(userWithOutPassDTO.getName()).isNotNull();
         assertThat(userWithOutPassDTO.getName()).isNotEmpty();
@@ -42,20 +42,18 @@ public class UserWithOutPassMapperTestIntegration {
         assertThat(userWithOutPassDTO.getDni()).isEqualTo("12345678B");
         assertThat(userWithOutPassDTO.getDni()).hasSize(9);
         assertThat(userWithOutPassDTO.getDni()).toString();
-        assertThat(userWithOutPassDTO.getDni()).containsPattern( "^[0-9]{8}[A-Z]{1}$");
+        assertThat(userWithOutPassDTO.getDni()).containsPattern("^[0-9]{8}[A-Z]{1}$");
 
     }
 
     @Test
-    public void UserWOmapperToEntity(){
-        UserWithOutPassDTO userWithOutPassDTO=new UserWithOutPassDTO("Celia","Salamanca","12345678B","celia@email.com");
+    public void UserWOmapperToEntity() {
+        UserWithOutPassDTO userWithOutPassDTO = new UserWithOutPassDTO("Celia", "Salamanca", "12345678B", "celia@email.com");
         assertThatExceptionOfType(UnsupportedOperationException.class)
                 .isThrownBy(() -> userWithOutPassMapper.mapToEntity(userWithOutPassDTO))
-               ;
+        ;
 
     }
-
-
 
 
 }
