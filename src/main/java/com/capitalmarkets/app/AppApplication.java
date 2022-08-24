@@ -34,13 +34,15 @@ public class AppApplication {
 
 
             CurrencyConverterDTO prueba2 = service.getConversion(10.5, "GBP", "USD");
-            /*log.info(prueba2.toString());*/
 
-            CurrencyHistoricalDTO prueba3 = service.getHistorical("2022-01-01", 5, "EUR", "GBP");
+      /*      log.info( prueba2.toString());*/
+
+            CurrencyHistoricalDTO prueba3 = service.getHistorical("2022-08-23", 5, "EUR", "GBP");
           /*  log.info(prueba3.toString());*/
 
-            CurrencyHistoricalDTO prueba4=service.getInterval("2022-01-01","2022-01-15",30,"USD","GBP");
-           log.info(prueba4.toString());
+            CurrencyHistoricalDTO prueba4=service.getInterval("2022-08-23","2022-08-24",30,"USD","GBP");
+   /*        log.info(prueba4.toString());*/
+
         };
 
 
