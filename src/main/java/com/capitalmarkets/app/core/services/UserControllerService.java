@@ -13,6 +13,7 @@ import java.util.List;
 @Component
 public class UserControllerService implements IuserControllerService {
     private final IUserProvider iUserProvider;
+    private final IEmailService emailService;
 
     @Override
     public void register(UserDTO userDTO) {
@@ -42,10 +43,29 @@ public class UserControllerService implements IuserControllerService {
         return iUserProvider.userWithOutPass(user.getMail());
     }
 
+
     @Override
     public UserWithOutPassDTO userWithOutPassByMail(String mail) {
         return iUserProvider.userWithOutPass(mail);
     }
 
+    @Override
+    public void restartPassword() {
+        String mail = "andres.ramos@optimissa.com";
+        UserDTO userDTO = iUserProvider.getUserByMail(mail);
+        String asunto = "Restablece tu contraseña de Capital Markets";
+
+        emailService.send(mail, asunto, buildBody());
+
+    }
+
+    private String buildBody() {
+        return  "<h2>Hola [userName],</h2>" +
+                "<p>Has recibido este e-mail porque has solicitado recuperar tu contraseña. Si no has sido quien ha realizado esta solicitud, ignora este mensaje.</p>"+
+                "<p>Para restablecer tu contraseña, haz click en esta URL o cópiala en tu navegador:</p>"+
+                "<a href=https://capitalmarkets.andres.top/reset_password>https://capitalmarkets.andres.top/reset_password</a><br><br>"+
+                "<p>Gracias por tu confianza,</p></br><em>Capital Markets</em><br>"+
+                "<img src=https://capitalmarkets.andres.top/CM.png  width=\"400\" height=\"330\" />";
+    }
 
 }
