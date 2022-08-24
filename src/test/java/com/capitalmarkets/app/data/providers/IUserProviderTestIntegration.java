@@ -33,6 +33,7 @@ public class IUserProviderTestIntegration {
     }
 
 
+
     @Test
     public void userWithOutPassTest() {
         String mail = "celia@email.com";

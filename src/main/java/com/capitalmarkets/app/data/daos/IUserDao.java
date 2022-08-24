@@ -12,7 +12,7 @@ public interface IUserDao extends JpaRepository<UserModel, String> {
 
     Optional<UserModel> getByDni(String dni);
 
-    Optional<UserModel> getByMail(String mail);
+     Optional<UserModel> getByMail(String mail);
 
     void deleteByMail(String mail);
 

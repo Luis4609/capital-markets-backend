@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @Component
 @AllArgsConstructor
-public class CurrencyControllerService implements IcurrencyControllerService{
+public class CurrencyControllerService implements IcurrencyControllerService {
 
     private final IcurrencyService servicio;
 
@@ -24,16 +24,16 @@ public class CurrencyControllerService implements IcurrencyControllerService{
 
     @Override
     public CurrencyConverterDTO getConversion(double value, String base, String conversion) {
-        return servicio.getConversion(value,base,conversion);
+        return servicio.getConversion(value, base, conversion);
     }
 
     @Override
-    public CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion){
+    public CurrencyHistoricalDTO getHistorical(String date, double value, String base, String conversion) {
         return servicio.getHistorical(date, value, base, conversion);
     }
 
     @Override
-    public CurrencyHistoricalDTO getInterval(String start, String end,double value, String base,String conversion) {
-        return servicio.getInterval(start,end,value,base,conversion);
+    public CurrencyHistoricalDTO getInterval(String start, String end, double value, String base, String conversion) {
+        return servicio.getInterval(start, end, value, base, conversion);
     }
 }

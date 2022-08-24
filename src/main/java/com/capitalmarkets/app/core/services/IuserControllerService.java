@@ -12,6 +12,7 @@ public interface IuserControllerService {
   /*  List<UserDTO> getAllUsers();*/
     UserDTO findByMail(String mail);
     UserWithOutPassDTO verifyPassword(LoginDTO loginDTO);
+
     UserWithOutPassDTO userWithOutPassByMail(String mail);
 
 }

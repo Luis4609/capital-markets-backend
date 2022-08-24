@@ -5,43 +5,43 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest()
 public class IUserDaoTestIntegration {
 
     @Autowired
-    private IUserDao iUserDao;
+    private  IUserDao iUserDao;
 
-    @Test
-    void userGetByDni() {
-        UserModel userModel = new UserModel(0, "Celia", "Salamanca", "12345678B", "celia@email.com", "1232");
-        String dni = "12345678B";
+    @Test //OK
+    void  userGetByDni(){
+      UserModel userModel=new UserModel(0,"Celia","Salamanca","69696969T","celia@email.com","1234");
+      Optional<UserModel> userModelOptional = iUserDao.getByDni("69696969T");
 
-        assertThat(userModel.getDni()).isNotNull();
-        assertThat(userModel.getDni()).isNotEmpty();
-        assertThat(dni).hasSize(9);
-        assertThat(userModel.getDni()).hasSize(9);
-        assertThat(dni).containsPattern("^[0-9]{8}[A-Z]{1}$");
-        assertThat(userModel.getDni()).containsPattern("^[0-9]{8}[A-Z]{1}$");
-        assertThat(userModel.getDni()).isEqualTo(dni);
-        assertThat(userModel.getDni()).isEqualToIgnoringCase(dni);
+        assertThat(userModelOptional.get().getDni()).isNotNull();
+        assertThat(userModelOptional.get().getDni()).isNotEmpty();
+        assertThat(userModelOptional.get().getDni()).hasSize(9);
+        assertThat(userModelOptional.get().getDni()).containsPattern( "^[0-9]{8}[A-Z]{1}$");
+        assertThat(userModelOptional.get().getDni()).isEqualTo(userModel.getDni());
+        assertThat(userModelOptional.get().getDni()).isEqualToIgnoringCase(userModel.getDni());
     }
 
 
-    @Test
-    void userGetByMail() {
-        UserModel userModel = new UserModel(0, "Celia", "Salamanca", "12345678B", "celia@email.com", "1232");
-        String mail = "celia@email.com";
+    @Test //OK
+    void userGetByMail(){
+        UserModel userModel=new UserModel(0,"Celia","Salamanca","69696969T","celia@email.com","1232");
+        Optional<UserModel> userTest=iUserDao.getByMail("celia@email.com");
 
-        assertThat(mail).isNotNull();
-        assertThat(mail).isNotEmpty();
-        assertThat(userModel.getMail()).isNotNull();
-        assertThat(userModel.getMail()).isNotEmpty();
-        assertThat(userModel.getMail()).isEqualToIgnoringCase(mail);
-        assertThat(userModel.getMail()).isEqualTo(mail);
-        assertThat(mail).containsPattern("^(.+)@(.+)$");
-        assertThat(userModel.getMail()).containsPattern("^(.+)@(.+)$");
+        assertThat(userTest).isNotNull();
+        assertThat(userTest).isNotEmpty();
+        assertThat(userTest.get().getMail()).isNotNull();
+        assertThat(userTest.get().getMail()).isNotEmpty();
+        assertThat(userTest.get().getMail()).isEqualToIgnoringCase("celia@email.com");
+        assertThat(userTest.get().getMail()).containsPattern("^(.+)@(.+)$");
+        assertThat(userTest.get().getMail()).isEqualTo(userModel.getMail());
+        assertThat(userTest.get().getDni()).isEqualTo(userModel.getDni());
 
     }
 }
