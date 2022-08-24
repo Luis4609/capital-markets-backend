@@ -4,9 +4,13 @@ import com.capitalmarkets.app.core.controller.CurrencyRestController;
 import com.capitalmarkets.app.dto.integration.CurrencyApiDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyConverterDTO;
 import com.capitalmarkets.app.dto.integration.CurrencyHistoricalDTO;
+import com.capitalmarkets.app.dto.integration.CurrencyRatesDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +35,7 @@ public class CurrencyControllerServiceTestIntegration {
 
     @Test
     public void conversionTestOK() {
-        CurrencyConverterDTO currencyConverterDTO = new CurrencyConverterDTO(20,"EUR",  "USD",21.50);
+        CurrencyConverterDTO currencyConverterDTO = new CurrencyConverterDTO(20, "EUR", "USD", 21.50);
         assertThat(currencyConverterDTO).isNotNull();
         assertThat(currencyConverterDTO.getAmount()).isEqualTo(20);
         assertThat(currencyConverterDTO.getFrom()).isEqualTo("EUR");
@@ -42,7 +46,12 @@ public class CurrencyControllerServiceTestIntegration {
 
     @Test
     public void historicalTestOK() {
-        CurrencyHistoricalDTO currencyHistoricalDTO = new CurrencyHistoricalDTO(20, "EUR", "USD", "2021/07/19", "2022/07/19", null );
+        List<CurrencyRatesDTO> rates = new ArrayList<CurrencyRatesDTO>();
+        CurrencyRatesDTO currencyRatesDTO = new CurrencyRatesDTO("2022-08-22", 4.2329);
+        rates.add(currencyRatesDTO);
+        CurrencyHistoricalDTO currencyHistoricalDTO = new CurrencyHistoricalDTO(5.0, "EUR", "GBP", "4.2329", "2022-08-22", "2022-08-22", rates);
+
+
         assertThat(currencyHistoricalDTO).isNotNull();
         assertThat(currencyHistoricalDTO.getAmount()).isEqualTo(20);
         assertThat(currencyHistoricalDTO.getBase()).isEqualTo("EUR");

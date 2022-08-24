@@ -14,9 +14,9 @@ public class UserMapperTestIntegration {
     private UserMapper userMapper;
 
     @Test
-    public void mapperUserToDtoTest(){
-        UserModel userModel=new UserModel(0,"Celia","Salamanca","12345678B","celia@email.com","E1232");
-        UserDTO dto=userMapper.mapToDto(userModel);
+    public void mapperUserToDtoTest() {
+        UserModel userModel = new UserModel(0, "Celia", "Salamanca", "12345678B", "celia@email.com", "E1232");
+        UserDTO dto = userMapper.mapToDto(userModel);
         assertThat(dto).isNotNull();
         assertThat(dto.getName()).isNotNull();
         assertThat(dto.getName()).isNotEmpty();
@@ -40,7 +40,7 @@ public class UserMapperTestIntegration {
         assertThat(dto.getDni()).isEqualTo("12345678B");
         assertThat(dto.getDni()).hasSize(9);
         assertThat(dto.getDni()).toString();
-        assertThat(dto.getDni()).containsPattern( "^[0-9]{8}[A-Z]{1}$");
+        assertThat(dto.getDni()).containsPattern("^[0-9]{8}[A-Z]{1}$");
         assertThat(dto.getPassword()).isNotNull();
         assertThat(dto.getPassword()).isNotEmpty();
         assertThat(dto.getPassword()).asString();
@@ -50,9 +50,9 @@ public class UserMapperTestIntegration {
     }
 
     @Test
-    public void mapperUserToEntityTest(){
-        UserDTO userDTO=new UserDTO("Celia","Salamanca","12345678B","celia@email.com","E1232");
-        UserModel userModel=userMapper.mapToEntity(userDTO);
+    public void mapperUserToEntityTest() {
+        UserDTO userDTO = new UserDTO("Celia", "Salamanca", "12345678B", "celia@email.com", "E1232");
+        UserModel userModel = userMapper.mapToEntity(userDTO);
         assertThat(userModel).isNotNull();
         assertThat(userModel.getName()).isNotNull();
         assertThat(userModel.getName()).isNotEmpty();
@@ -76,7 +76,7 @@ public class UserMapperTestIntegration {
         assertThat(userDTO.getDni()).isEqualTo("12345678B");
         assertThat(userModel.getDni()).hasSize(9);
         assertThat(userDTO.getDni()).toString();
-        assertThat(userDTO.getDni()).containsPattern( "^[0-9]{8}[A-Z]{1}$");
+        assertThat(userDTO.getDni()).containsPattern("^[0-9]{8}[A-Z]{1}$");
         assertThat(userDTO.getPassword()).isNotNull();
         assertThat(userDTO.getPassword()).isNotEmpty();
         assertThat(userDTO.getPassword()).asString();

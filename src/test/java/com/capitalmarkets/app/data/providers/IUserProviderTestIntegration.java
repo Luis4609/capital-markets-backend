@@ -32,15 +32,6 @@ public class IUserProviderTestIntegration {
 
     }
 
-    @Test
-    public void createUserTest() {
-        UserDTO userDTO = new UserDTO("Celia", "Salamanca", "12345678B", "celia@email.com", "E1232");
-        iUserProvider.createUser(userDTO);
-
-        //TODO
-
-
-    }
 
     @Test
     public void userWithOutPassTest() {

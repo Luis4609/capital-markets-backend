@@ -5,13 +5,15 @@ import com.capitalmarkets.app.data.entities.CurrencyModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest()
 public class ICurrencyDaoTestIntegration {
     @Autowired
     private ICurrencyDao iCurrencyDao;
+
     @Test
     void currencyGetByNameTest() {
         CurrencyModel currencyModel = new CurrencyModel(1, "EUR", "euro");
@@ -27,9 +29,10 @@ public class ICurrencyDaoTestIntegration {
         assertThat(currencyModel.getCode()).asString();
 
     }
+
     @Test
-    void currencyGetByCodeTest(){
-        CurrencyModel currencyModel = new CurrencyModel( 1, "EUR", "euro");
+    void currencyGetByCodeTest() {
+        CurrencyModel currencyModel = new CurrencyModel(1, "EUR", "euro");
         assertThat(currencyModel).isNotNull();
         assertThat(currencyModel.getName()).isNotNull();
         assertThat(currencyModel.getName()).isEqualTo("euro");
@@ -42,11 +45,6 @@ public class ICurrencyDaoTestIntegration {
         assertThat(currencyModel.getCode()).isEqualToIgnoringCase("eur");
 
     }
-
-
-
-
-
 
 
 }

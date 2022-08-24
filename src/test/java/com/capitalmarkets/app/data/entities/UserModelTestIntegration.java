@@ -11,8 +11,8 @@ public class UserModelTestIntegration {
     private UserModel userModel;
 
     @Test
-    void idAutoIncrementTest(){
-        userModel=new UserModel(1,"Celia", "Salamanca","12345678S","celia@gmail.com","1233");
+    void idAutoIncrementTest() {
+        userModel = new UserModel(1, "Celia", "Salamanca", "12345678S", "celia@gmail.com", "1233");
         assertThat(userModel.getId()).isNotZero();
         assertThat(userModel.getId()).isNotNull();
         assertThat(userModel.getId()).isPositive();
@@ -22,8 +22,8 @@ public class UserModelTestIntegration {
 
 
     @Test
-    void nameTest(){
-        userModel=new UserModel(1,"Celia", "Salamanca","12345678S","celia@gmail.com","1233");
+    void nameTest() {
+        userModel = new UserModel(1, "Celia", "Salamanca", "12345678S", "celia@gmail.com", "1233");
         assertThat(userModel.getName()).isNotNull();
         assertThat(userModel.getName()).isNotEmpty();
         assertThat(userModel.getName()).asString();
@@ -34,10 +34,9 @@ public class UserModelTestIntegration {
     }
 
 
-
     @Test
-    void surnameTest(){
-        userModel=new UserModel(1,"Celia", "Salamanca","12345678S","celia@gmail.com","1233");
+    void surnameTest() {
+        userModel = new UserModel(1, "Celia", "Salamanca", "12345678S", "celia@gmail.com", "1233");
         assertThat(userModel.getSurname()).isNotNull();
         assertThat(userModel.getSurname()).isNotEmpty();
         assertThat(userModel.getSurname()).asString();
@@ -49,21 +48,21 @@ public class UserModelTestIntegration {
 
 
     @Test
-    void dniTest(){
-        userModel=new UserModel(1,"Celia", "Salamanca","12345678S","celia@gmail.com","1233");
+    void dniTest() {
+        userModel = new UserModel(1, "Celia", "Salamanca", "12345678S", "celia@gmail.com", "1233");
         assertThat(userModel.getDni()).isNotNull();
         assertThat(userModel.getDni()).isNotEmpty();
         assertThat(userModel.getDni()).asString();
         assertThat(userModel.getDni()).isEqualToIgnoringCase("12345678s");
         assertThat(userModel.getDni()).isEqualTo("12345678S");
         assertThat(userModel.getDni()).toString();
-        assertThat(userModel.getDni()).containsPattern( "^[0-9]{8}[A-Z]{1}$");
+        assertThat(userModel.getDni()).containsPattern("^[0-9]{8}[A-Z]{1}$");
 
     }
 
     @Test
-    void emailTest(){
-        userModel=new UserModel(1,"Celia", "Salamanca","12345678S","celia@gmail.com","1233");
+    void emailTest() {
+        userModel = new UserModel(1, "Celia", "Salamanca", "12345678S", "celia@gmail.com", "1233");
         assertThat(userModel.getMail()).isNotNull();
         assertThat(userModel.getMail()).isNotEmpty();
         assertThat(userModel.getMail()).asString();
@@ -73,9 +72,10 @@ public class UserModelTestIntegration {
         assertThat(userModel.getMail()).containsPattern("^(.+)@(.+)$");
 
     }
+
     @Test
-    void passwordTest(){
-        userModel=new UserModel(1,"Celia", "Salamanca","12345678S","celia@gmail.com","A1233");
+    void passwordTest() {
+        userModel = new UserModel(1, "Celia", "Salamanca", "12345678S", "celia@gmail.com", "A1233");
         assertThat(userModel.getPassword()).isNotNull();
         assertThat(userModel.getPassword()).isNotEmpty();
         assertThat(userModel.getPassword()).asString();
