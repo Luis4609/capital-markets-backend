@@ -2,7 +2,9 @@ package com.capitalmarkets.app.core.service;
 
 
 import com.capitalmarkets.app.core.services.UserControllerService;
+import com.capitalmarkets.app.dto.core.LoginDTO;
 import com.capitalmarkets.app.dto.data.UserDTO;
+import com.capitalmarkets.app.dto.data.UserWithOutPassDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,61 +19,50 @@ public class UserControllerServiceTestIntegration {
     private UserControllerService userControllerService;
 
 
-    @Test
-    public void registerTestOK() {
-        UserDTO userdto = new UserDTO("Luis", "Monzón", "50540431Y", "luis@gmail.com", "1234");
-
-        assertThat(userdto).isNotNull();
-        assertThat(userdto.getName()).isNotEmpty();
-        assertThat(userdto.getSurname()).isNotEmpty();
-        assertThat(userdto.getDni()).isNotEmpty();
-        assertThat(userdto.getMail()).isNotEmpty();
-        assertThat(userdto.getPassword()).isNotEmpty();
-        assertThat(userdto.getName()).isNotNull();
-        assertThat(userdto.getSurname()).isNotNull();
-        assertThat(userdto.getDni()).isNotNull();
-        assertThat(userdto.getMail()).isNotNull();
-        assertThat(userdto.getPassword()).isNotNull();
-        assertThat(userdto.getDni()).hasSize(9);
-        assertThat(userdto.getName()).isEqualToNormalizingPunctuationAndWhitespace("Luis");
-        assertThat(userdto.getSurname()).isEqualToNormalizingPunctuationAndWhitespace("Monzón");
-        assertThat(userdto.getDni()).endsWith("Y");
-        assertThat(userdto.getDni()).containsPattern("^[0-9]{8}[A-Z]{1}$");
-        assertThat(userdto.getMail()).containsPattern("^(.+)@(.+)$");
-        assertThat(userdto.getDni()).toString();
-        assertThat(userdto.getDni()).asString();
-        assertThat(userdto.getMail()).toString();
-        assertThat(userdto.getMail()).asString();
-        assertThat(userdto.getMail()).isEqualToIgnoringCase("LUIS@gmail.com");
-        //assertThat(userdto.getMail()).hasSizeBetween(4, 8);
-
-    }
-
-    @Test
+    @Test // OK
     public void findByMailTestOK() {
-        UserDTO userDTO = new UserDTO("Luis", "Monzón", "50540431Y", "luis@gmail.com", "1234");
+        String mail = "luis@email.com";
+        UserDTO userDTO = new UserDTO("Luis", "Monzon", "69696969V", "luis@email.com", "1234");
+        UserDTO userDTO1 = userControllerService.findByMail("luis@email.com");
 
         assertThat(userDTO).isNotNull();
         assertThat(userDTO.getMail()).isNotNull();
         assertThat(userDTO.getMail()).isNotEmpty();
-        assertThat(userDTO.getMail()).isEqualToIgnoringCase("LUIS@gmail.com");
-        assertThat(userDTO.getMail()).isEqualToNormalizingPunctuationAndWhitespace("luis@gmail.com");
+        assertThat(userDTO.getMail()).isEqualToIgnoringCase("LUIS@email.com");
+        assertThat(userDTO.getMail()).isEqualToNormalizingPunctuationAndWhitespace("luis@email.com");
         assertThat(userDTO.getMail()).toString();
         assertThat(userDTO.getMail()).asString();
         assertThat(userDTO.getMail()).containsPattern("^(.+)@(.+)$");
+        assertThat(userDTO.getMail()).isEqualTo(userDTO1.getMail());
+        assertThat(userDTO.getPassword()).isEqualTo(userDTO1.getPassword());
+        assertThat(userDTO.getName()).isEqualTo(userDTO1.getName());
+        assertThat(userDTO.getSurname()).isEqualTo(userDTO1.getSurname());
+        assertThat(userDTO.getDni()).isEqualTo(userDTO1.getDni());
+        assertThat(userDTO.getMail()).isEqualToIgnoringCase(userDTO1.getMail());
     }
 
-    @Test
+    @Test // ok
     public void verifyPasswordTestOK() {
-        UserDTO userDTO = new UserDTO("Luis", "Monzón", "50540431Y", "luis@gmail.com", "1234");
+        LoginDTO loginDTO = new LoginDTO("luis@email.com", "1234");
+        UserWithOutPassDTO result = userControllerService.verifyPassword(loginDTO);
+        UserDTO expected = new UserDTO("Luis", "Monzon", "69696969V", "luis@email.com", "1234");
 
-        assertThat(userDTO).isNotNull();
-        assertThat(userDTO.getPassword()).isNotEmpty();
-        assertThat(userDTO.getPassword()).isNotNull();
-        assertThat(userDTO.getPassword()).isEqualToNormalizingPunctuationAndWhitespace("1234");
-        assertThat(userDTO.getPassword()).hasSizeBetween(4, 8);
-        assertThat(userDTO.getPassword()).toString();
-        assertThat(userDTO.getPassword()).asString();
+        assertThat(result).isNotNull();
+        assertThat(result.getMail()).isNotNull();
+        assertThat(result.getMail()).isNotEmpty();
+        assertThat(result.getMail()).isEqualToIgnoringCase("LUIS@email.com");
+        assertThat(result.getMail()).isEqualToNormalizingPunctuationAndWhitespace("luis@email.com");
+        assertThat(result.getMail()).toString();
+        assertThat(result.getMail()).asString();
+        assertThat(result.getMail()).containsPattern("^(.+)@(.+)$");
+        assertThat(result.getMail()).isEqualTo(expected.getMail());
+        assertThat(result.getName()).isEqualTo(expected.getName());
+        assertThat(result.getSurname()).isEqualTo(expected.getSurname());
+        assertThat(result.getDni()).isEqualTo(expected.getDni());
+        assertThat(result.getMail()).isEqualToIgnoringCase(expected.getMail());
+        assertThat(result.getMail()).isEqualToIgnoringCase(expected.getMail());
+        assertThat(expected.getPassword()).isEqualTo(loginDTO.getPassword());
+
         //assertThat(userDTO.getPassword()).containsPattern();
     }
 }
