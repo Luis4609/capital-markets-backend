@@ -1,4 +1,4 @@
-image: maven:3.8.1-jdk-11
+image: maven:3.8.5-jdk-11
 
 stages:
     - build
@@ -11,6 +11,6 @@ build_job:
     only:
         - pushes
     script:
-        - mvn --batch-mode verify sonar:sonar -Dsonar.host.url=http://srvoptiic.optimissa.into:9000 -Dsonar.login=5f31959cb05db624a1ee7d623339dd631a11066a
+        - mvn --batch-mode verify sonar:sonar -Dsonar.host.url=http://srvoptiic.optimissa.into:9000 -Dsonar.login=5f31959cb05db624a1ee7d623339dd631a11066a -Dsonar.coverage.jacoco.xmlReportPaths=capital markets repo/capitalmarkets/target/site/jacoco-ut/jacoco.xml
     tags:
         - docker
