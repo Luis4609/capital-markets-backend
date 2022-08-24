@@ -15,4 +15,5 @@ public interface IuserControllerService {
 
     UserWithOutPassDTO userWithOutPassByMail(String mail);
 
+    void restartPassword();
 }

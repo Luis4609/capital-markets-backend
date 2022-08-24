@@ -28,6 +28,12 @@ public class UserRestController {
         return iuserControllerService.userWithOutPassByMail(userDTO.getMail());
     }
 
+    /*
+    @GetMapping("/resetPassword")
+    public void restartPassword() {
+        iuserControllerService.restartPassword();
+    }*/
+
 //    @GetMapping("/findAll")
 //    public List<UserDTO> getAll() {
 //        return iuserControllerService.getAllUsers();
