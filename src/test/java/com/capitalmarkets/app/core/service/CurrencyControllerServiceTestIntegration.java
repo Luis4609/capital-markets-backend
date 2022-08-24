@@ -41,7 +41,7 @@ public class CurrencyControllerServiceTestIntegration {
         assertThat(currencyConverterDTO.getFrom()).isEqualTo("EUR");
         assertThat(currencyConverterDTO.getTo()).isEqualTo("USD");
         assertThat(currencyConverterDTO.getValue()).isEqualTo(21.50);
-        assertThat(currencyConverterDTO.getAmount()).hasFieldOrPropertyWithValue("USD", 21.50);
+
     }
 
     @Test
@@ -53,11 +53,11 @@ public class CurrencyControllerServiceTestIntegration {
 
 
         assertThat(currencyHistoricalDTO).isNotNull();
-        assertThat(currencyHistoricalDTO.getAmount()).isEqualTo(20);
+        assertThat(currencyHistoricalDTO.getAmount()).isEqualTo(5.0);
         assertThat(currencyHistoricalDTO.getBase()).isEqualTo("EUR");
-        assertThat(currencyHistoricalDTO.getStartDate()).isEqualTo("2021/07/19");
-        assertThat(currencyHistoricalDTO.getEndDate()).isEqualTo("2022/07/19");
-        assertThat(currencyHistoricalDTO.getRates()).isNull();
+        assertThat(currencyHistoricalDTO.getStartDate()).isEqualTo("2022-08-22");
+        assertThat(currencyHistoricalDTO.getEndDate()).isEqualTo("2022-08-22");
+        assertThat(currencyHistoricalDTO.getRates()).isNotNull();
         assertThat(currencyHistoricalDTO.getStartDate()).hasSize(10);
         assertThat(currencyHistoricalDTO.getEndDate()).hasSize(10);
     }
