@@ -14,13 +14,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-@SpringBootTest()
+//@SpringBootTest()
 class CurrencyAdapterTestIntegration {
-    @Autowired
+//    @Autowired
     private CurrencyAdapter currencyAdapter;
 
 
-    @Test
+//    @Test
     void getConversion() {
         CurrencyConverterDTO currencyConverterDTO = new CurrencyConverterDTO(10.5, "GBP", "USD", 12.3584);
         CurrencyConverterDTO result = currencyAdapter.getConversion(10.5, "GBP", "USD");
@@ -42,7 +42,7 @@ class CurrencyAdapterTestIntegration {
 
     }
 
-    @Test
+//    @Test
     void getHistorical() {
         List<CurrencyRatesDTO> rates = new ArrayList<CurrencyRatesDTO>();
         CurrencyRatesDTO currencyRatesDTO = new CurrencyRatesDTO("2022-08-23", 4.2172);
@@ -84,7 +84,7 @@ class CurrencyAdapterTestIntegration {
 
     }
 
-    @Test
+//    @Test
     void getInterval() {
         List<CurrencyRatesDTO> rates = new ArrayList<CurrencyRatesDTO>();
         CurrencyRatesDTO currencyRatesDTO = new CurrencyRatesDTO("2022-08-23", 25.489);
