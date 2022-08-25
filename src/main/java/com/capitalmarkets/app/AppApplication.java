@@ -27,7 +27,7 @@ public class AppApplication {
 
             prueba1.restartPassword();
 
-            /*for (CurrencyApiDTO currencyApiDTO : service.getAll()) {
+            for (CurrencyApiDTO currencyApiDTO : service.getAll()) {
 
                 prov.create(currencyApiDTO);
                 log.info(currencyApiDTO.toString());
@@ -42,7 +42,7 @@ public class AppApplication {
             log.info(prueba3.toString());
 
             CurrencyHistoricalDTO prueba4=service.getInterval("2022-08-23","2022-08-24",30,"USD","GBP");
-           log.info(prueba4.toString());*/
+           log.info(prueba4.toString());
 
         };
 
