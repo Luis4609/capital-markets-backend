@@ -184,7 +184,12 @@ public class FilesRestController {
     @PostMapping("/pdfHistorical")
     public HashMap<String, Object> getHistoricalPdf(@RequestBody CurrencyHistoricalDTO dto) throws IOException, IllegalAccessException {
 
-        String path = "capitalmarkets\\src\\main\\resources\\files\\historical.pdf";
+        LocalDate date=LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String str=date.format(formatter);
+
+
+        String path = "capitalmarkets\\src\\main\\resources\\files\\" + str+".pdf";
         CurrencyHistoricalDTO text = (controllerService.getInterval(dto.getStartDate(), dto.getEndDate(), dto.getAmount(), dto.getBase(), dto.getConversion()));
 
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter(path));
@@ -210,120 +215,6 @@ public class FilesRestController {
     }
 
 
-//    @SneakyThrows
-//    private void headerPdf(PDPageContentStream contentStream, PDDocument document, PDPage page) {
-//
-//        PDImageXObject pdImageTitle = PDImageXObject.createFromFile("capitalmarkets/src/main/resources/img/header.png", document);
-//        contentStream.drawImage(pdImageTitle, 28, 668, pdImageTitle.getWidth() / 3, pdImageTitle.getHeight() / 3);
-//
-//        contentStream.beginText();
-//        contentStream.setFont(PDType1Font.COURIER_BOLD, 30);
-//        contentStream.setLeading(14.5f);
-//        contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 52);
-//        contentStream.showText("DATOS DE CONVERSION");
-//        contentStream.newLine();
-//        contentStream.newLine();
-//        contentStream.endText();
-//    }
-//
-//    @SneakyThrows
-//    private void infoPdf(PDPageContentStream contentStream, CurrencyHistoricalDTO texto, PDPage page) {
-//
-//        contentStream.beginText();
-//        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
-//        contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 100);
-//        contentStream.showText("    FECHA: ");
-//        contentStream.newLine();
-//        contentStream.setFont(PDType1Font.COURIER, 9);
-//        contentStream.showText("     Desde: " + texto.getStartDate() + " Hasta: " + texto.getEndDate());
-//        contentStream.newLine();
-//        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
-//        contentStream.showText("    DE: ");
-//        contentStream.setFont(PDType1Font.COURIER, 9);
-//        contentStream.showText(texto.getBase());
-//        contentStream.newLine();
-//        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
-//        contentStream.showText("    A: ");
-//        contentStream.setFont(PDType1Font.COURIER, 9);
-//        contentStream.showText(texto.getTo());
-//        contentStream.newLine();
-//        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
-//        contentStream.showText("    VALOR ACTUAL: ");
-//        contentStream.setFont(PDType1Font.COURIER, 9);
-//        contentStream.showText(texto.getConversion());
-//        contentStream.newLine();
-//        contentStream.newLine();
-//        contentStream.endText();
-//
-//    }
-//
-//    @SneakyThrows
-//    private void dataPdf(PDPageContentStream contentStream, PDDocument document, PDPage page, CurrencyHistoricalDTO texto) {
-//
-//        PDImageXObject pdImage = PDImageXObject.createFromFile("capitalmarkets/src/main/resources/img/CM.png", document);
-//        PDImageXObject pdOptImage = PDImageXObject.createFromFile("capitalmarkets/src/main/resources/img/Optimissa.png", document);
-//
-//
-//        contentStream.beginText();
-//        contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 12);
-//        contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 180);
-//        contentStream.showText("    HISTORICO DE VALORES: ");
-//        contentStream.newLine();
-//        contentStream.newLine();
-//        contentStream.setFont(PDType1Font.COURIER, 9);
-//
-//
-//        int line = 0;
-//        for (int i = 0; i < texto.getRates().size(); i++) {
-//
-//            StringBuilder builder = new StringBuilder();
-//            CurrencyRatesDTO o = texto.getRates().get(i);
-//
-//
-//            for (Field field : texto.getRates().get(i).getClass().getDeclaredFields()) {
-//                field.setAccessible(true);
-//                builder.append("      ")
-//                        .append(field.getName())
-//                        .append(" = ")
-//                        .append(field.get(o))
-//                        .append("                                              ");
-//            }
-//
-//            System.out.println("builder: " + builder);
-//
-//            line++;
-//
-//            if (line == 35) {
-//
-//                contentStream.endText();
-//                contentStream.drawImage(pdImage, 410, 10, pdImage.getWidth() / 3, pdImage.getHeight() / 3);
-//                contentStream.drawImage(pdOptImage, 10, 10, pdOptImage.getWidth() / 2, pdOptImage.getHeight() / 2);
-//                contentStream.close();
-//
-//                PDPage page1 = new PDPage(PDRectangle.A4);
-//                document.addPage(page1);
-//                contentStream = new PDPageContentStream(document, page1);
-//                contentStream.beginText();
-//                contentStream.setLeading(14.5f);
-//                contentStream.newLineAtOffset(20, page.getMediaBox().getHeight() - 52);
-//                contentStream.setFont(PDType1Font.COURIER, 9);
-//                contentStream.showText(builder.toString());
-//
-//                line = 0;
-//            }
-//
-//            contentStream.showText(builder.toString());
-//            contentStream.newLine();
-//
-//
-//        }
-//
-//        contentStream.endText();
-//        contentStream.drawImage(pdImage, 410, 10, pdImage.getWidth() / 3, pdImage.getHeight() / 3);
-//        contentStream.drawImage(pdOptImage, 10, 10, pdOptImage.getWidth() / 2, pdOptImage.getHeight() / 2);
-//        contentStream.close();
-//
-//    }
 
 
     private void infoPdf2(Document doc, CurrencyHistoricalDTO text) throws IOException {
