@@ -25,7 +25,7 @@ public class AppApplication {
     public CommandLineRunner runner(IcurrencyService service, ICurrencyProvider prov, UserControllerService prueba1) {
         return args -> {
 
-            prueba1.restartPassword();
+//            prueba1.restartPassword();
 
             for (CurrencyApiDTO currencyApiDTO : service.getAll()) {
 

@@ -181,6 +181,7 @@ public class FilesRestController {
     }
 
 
+    @CrossOrigin(origins = "*", methods = RequestMethod.POST)
     @PostMapping("/pdfHistorical")
     public HashMap<String, Object> getHistoricalPdf(@RequestBody CurrencyHistoricalDTO dto) throws IOException, IllegalAccessException {
 
@@ -189,7 +190,9 @@ public class FilesRestController {
         String str=date.format(formatter);
 
 
-        String path = "capitalmarkets\\src\\main\\resources\\files\\" + str+".pdf";
+//        String path = "capital-markets\\src\\main\\resources\\files\\" + str+".pdf";
+//        String path = "capital-markets\\src\\main\\resources\\files\\pdf_chart_historical.pdf";
+        String path = "..\\capitalmarketsfront\\public\\pdf_chart_historical.pdf";
         CurrencyHistoricalDTO text = (controllerService.getInterval(dto.getStartDate(), dto.getEndDate(), dto.getAmount(), dto.getBase(), dto.getConversion()));
 
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter(path));
@@ -197,8 +200,9 @@ public class FilesRestController {
 
         HashMap<String, Object> map = new HashMap<>();
         try {
-
+            log.info("HAS ENTRADO");
             infoPdf2(doc, text);
+            log.info("HAS PASADO INFOPDF");
             dataPdf2(doc, text);
 
             map.put("message", "The pdf was created");
@@ -209,6 +213,7 @@ public class FilesRestController {
 
             map.put("Message", "Internal error");
             map.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+            map.put("exception", e.getMessage());
         }
 
         return map;
@@ -249,7 +254,7 @@ public class FilesRestController {
         }
         tableAux.addCell(table).setVerticalAlignment(VerticalAlignment.MIDDLE);
 
-        Image img = new Image(ImageDataFactory.create("capitalmarkets/src/main/resources/img/CM.png"));
+        Image img = new Image(ImageDataFactory.create("capital-markets/src/main/resources/img/CM.png"));
         img.setWidth(120);
         img.setHeight(120);
         img.setMarginLeft(20);
@@ -263,7 +268,7 @@ public class FilesRestController {
         PdfFont font = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
         PdfFont bold = PdfFontFactory.createFont(StandardFonts.TIMES_BOLD);
 
-        Image img = new Image(ImageDataFactory.create("capitalmarkets/src/main/resources/img/footer.png"));
+        Image img = new Image(ImageDataFactory.create("capital-markets/src/main/resources/img/footer.png"));
         img.setWidth(200);
         img.setHeight(70);
 

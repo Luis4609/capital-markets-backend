@@ -7,7 +7,7 @@ import com.capitalmarkets.app.dto.data.UserWithOutPassDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
 public class UserRestController {
