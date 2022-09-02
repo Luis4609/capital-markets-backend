@@ -254,7 +254,7 @@ public class FilesRestController {
         }
         tableAux.addCell(table).setVerticalAlignment(VerticalAlignment.MIDDLE);
 
-        Image img = new Image(ImageDataFactory.create("capital-markets/src/main/resources/img/CM.png"));
+        Image img = new Image(ImageDataFactory.create("../capital-markets/src/main/resources/img/CM.png"));
         img.setWidth(120);
         img.setHeight(120);
         img.setMarginLeft(20);
@@ -268,7 +268,7 @@ public class FilesRestController {
         PdfFont font = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
         PdfFont bold = PdfFontFactory.createFont(StandardFonts.TIMES_BOLD);
 
-        Image img = new Image(ImageDataFactory.create("capital-markets/src/main/resources/img/footer.png"));
+        Image img = new Image(ImageDataFactory.create("../capital-markets/src/main/resources/img/footer.png"));
         img.setWidth(200);
         img.setHeight(70);
 
